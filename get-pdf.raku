@@ -1,5 +1,5 @@
 #!/usr/bin/env raku 
-
+# vim: filetype=perl6
 
 #`[
 works...

@@ -1,5 +1,16 @@
 #!/usr/bin/env raku 
-# vim: filetype=perl6
+
+#`[ todos
+-loop of loops
+-pdf url
+#]
+
+#`[ items 
+- article level
+-- my @keywords; #nope
+- issue level
+-- ?
+#]
 
 #`[
 works...
@@ -39,19 +50,14 @@ $url = 'http://ejise.com/issue/current.html';
 my $file = 'current.html';
 my $fh = open( $file );
 my $html = $fh.slurp;
-
-#`[[
-my @lines = $fh.lines;
-for @lines -> $line {
-	if $line ~~ /Abstract/ {
-		say $line;	
-	}
-}
-#]]
 $fh.close;
 
 use XML;
 use HTML::Parser::XML;
+
+my $verbose = 1;
+my $journal = 'ejise';
+
 my $parser = HTML::Parser::XML.new;
 $parser.parse($html);
 my $d = $parser.xmldoc; # XML::Document
@@ -63,56 +69,86 @@ my @author-elms = $d.elements(:RECURSE(Inf), :class('author-list'));
 my @author-strs;
 my @abstr-elms = $d.elements(:RECURSE(Inf), :class('article-description-text')); 
 my @abstr-strs;
+my @oldurl-elms = $d.elements(:RECURSE(Inf), :class('article-sub-container')); 
+my @oldurl-strs;
 
-say "===Volume Info===";
+say "===Volume Info===" if $verbose;
 my $volinf1 = @title-elms.splice(0,1).[0];
 parse-title( $volinf1 );
+my $vol-title = @title-strs.splice(0,1).[0];
 my $volinf2 = @author-elms.splice(0,1).[0];		#may need for Volime Editor(s)
+my $volinf3 = @oldurl-elms.splice(0,1).[0];
+parse-oldurl( $volinf3 );
+my $vol-oldurl = @oldurl-strs.splice(0,1).[0];
+say "+++++++++++++++++++\n" if $verbose;
 
 for 0..^@title-elms -> $i {
-	say "===Article No.$i===";
-	parse-title( @title-elms[$i] );
-	parse-pprange( @title-elms[$i] );
-	parse-authors( @author-elms[$i] );
-	parse-abstr( @abstr-elms[$i] );
-	say "+++++++++++++++++++\n";
+	say "===Article No.$i===" if $verbose;
+	parse-title(    @title-elms[$i]    );
+	parse-pprange(  @title-elms[$i]    );
+	parse-oldurl(   @oldurl-elms[$i]   );
+	parse-authors(  @author-elms[$i]   );
+	parse-abstr(    @abstr-elms[$i]    );
+	say "+++++++++++++++++++\n" if $verbose;
 }
 
 sub parse-title( $t ) {
 	my @a    = $t.elements(:TAG<a>);
 	my $res  = @a[0].firstChild().text.trim;
-	say "Title:\n$res";
+	say "Title:\n$res" if $verbose;
 	@title-strs.push: $res;
 }
 sub parse-pprange( $t ) {
 	my @span = $t.elements(:TAG<span>);
 	my $res  = @span[0].firstChild().text.trim;
-	say "Pages:\n$res";
+	say "Pages:\n$res" if $verbose;
 	@pp-ranges.push: $res;
+}
+#`[ transform from issuu url to download url
+http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p
+http://ejise.com/issue/download.html?idArticle=1084
+-or- can already be in download form
+http://ejise.com/issue/download.html?idIssue=252
+#]
+sub parse-oldurl( $t ) {
+	my @p    = $t.elements(:TAG<p>);
+	my @a    = @p[0].elements(:TAG<a>);
+	my $res  = @a[0].attribs<href>;
+	unless $res ~~ m|download| {
+		$res ~~ m|article(\d*)\?mode|;
+		$res = qq|http://$journal.com/issue/download.html?idArticle=$0|;
+	}
+	say "OldUrl:\n$res" if $verbose;
+	@oldurl-strs.push: $res;
 }
 sub parse-authors( $t ) {
 	my @a    = $t.elements(:TAG<a>);
 	my @res;
-	say "Authors:";
+	say "Authors:" if $verbose;
 	for 0..^@a -> $j {
 		my $res  = @a[$j].firstChild().text.trim;
-		say "$res";
+		say "$res" if $verbose;
 		@res.push: $res;
 	}
 	@author-strs.push: @res;
 }
 sub parse-abstr( $t ) {
 	my $res  = $t.firstChild().text.trim;
-	say "Abstract:\n$res";
+	$res ~~ s:global/\n//;
+	say "Abstract:\n$res" if $verbose;
 	@abstr-strs.push: $res;
 }
 
+#`[check length
+say @title-strs.elems;
+say @pp-ranges.elems;
+say @author-strs.elems;
+say @abstr-strs.elems;
+say @oldurl-strs.elems;
+#]
 
-#iamereh - line endings, then loop of loops & pdf url
 
-
-
-#`[
+#`[ some useful XML lookup commmands
 my $head = $html.elements(:TAG<head>, :SINGLE);
 my @stylesheets = $head.elements(:TAG<link>, :rel<stylesheet>);
 my @middle = $table.elements(:!FIRST, :!LAST);
@@ -121,22 +157,7 @@ my @not-red = $div.elements(:class(* ne 'red'));
 my @elms-by-class-name = $html.elements(:RECURSE(Inf), :class('your-class-name')); 
 #]
 
-#`[ wantlist - article level :
-my @keywords; #nope
-#]
 
-#`[ command dump
-say @a[0];
-say ~$d.version;
-say ~$d.root.name;
-say ~$d.root.firstChild();
-say ~$d.root.lastChild();
-my $head = $d.elements(:TAG<head>, :SINGLE); say $head;
-#say @abstracts;
-say ~@abstracts[0].name;
-say @abstracts[0].nodes[0];
-say @abstracts[0].nodes.elems;
-#]
 
 
 

@@ -78,16 +78,17 @@ class issue {
 	#has $.pprange; #not needed(?)
 	#has @.authors; #not needed(?)
 	has $.oldurl;
+	has $.ref-id;
 	has $.filename;
-	has @.articles;
+	has @.articles; #index is from 1 to n
 }
 class article {
-	has $.number;
 	has $.title;
 	has $.pprange;
 	has @.authors;
 	has $.abstract;
 	has $.oldurl;
+	has $.ref-id;
 	has $.filename;
 }
 
@@ -101,88 +102,67 @@ my @title-elms = $d.elements(:RECURSE(Inf), :class('article-title-container'));
 my @author-elms = $d.elements(:RECURSE(Inf), :class('author-list')); 
 my @abstr-elms = $d.elements(:RECURSE(Inf), :class('article-description-text')); 
 my @oldurl-elms = $d.elements(:RECURSE(Inf), :class('article-sub-container')); 
-## drop these...
-my @title-strs;
-my @pp-ranges;
-my @author-strs;
-my @abstr-strs;
-my @oldurl-strs;
-my @filenm-strs;
 
 say "===Volume Info===" if $verbose;
 #using splices to handle re-use of tag for volume/issue
 
-my $vit = parse-title( @title-elms.splice(0,1).[0] ).splice(0,1).[0]; 
-
 #eg. 'Volume 23 Issue 1 / Feb 2020'
+my $vit = parse-title( @title-elms.splice(0,1).[0] );
 $vit ~~ m|Volume \s* (\d*) \s* Issue \s* (\d*) \s* \/ \s* (\w*\s+\d*)|;
 
-$j.volumes[0] = volume.new( 
+my $vi = 0;
+$j.volumes[$vi] = volume.new( 
 	number => +$0 
 );
 say "+++++++++++++++++++\n" if $verbose;
 
 say "===Issue Info===" if $verbose;
-#may need this later for Issue Editor(s)
-#my $iss-authors = @author-elms.splice(0,1).[0];
-my $iss-oldurl = parse-oldurl( @oldurl-elms.splice(0,1).[0] ).splice(0,1).[0];
+#my $iss-authors = @author-elms.splice(0,1).[0]; #may need this later for Issue Editor(s)
+my $iss-oldurl = parse-oldurl( @oldurl-elms.splice(0,1).[0] );
 
-$j.volumes[0].issues[0] = issue.new( 
+my $ii = 0;
+$j.volumes[$vi].issues[$ii] = issue.new( 
 	number => +$1, 
 	date   => ~$2, 
 	oldurl => $iss-oldurl,
+	refid  => url2id-issue( $iss-oldurl ),
+##	filename => FIXME,
 );
 say "+++++++++++++++++++\n" if $verbose;
 
-say $j;
-die;
-
-for 0..^@title-elms -> $i {
-	say "===Article No.$i===" if $verbose;
-	parse-title(    @title-elms[$i]    );
-	parse-pprange(  @title-elms[$i]    );
-	parse-oldurl(   @oldurl-elms[$i]   );
-	parse-authors(  @author-elms[$i]   );
-	parse-abstr(    @abstr-elms[$i]    );
+##for 1..@title-elms -> $ai {
+my $ai=1;
+	say "===Article No.$ai===" if $verbose;
+	my $art-oldurl = parse-oldurl( @oldurl-elms[$ai] ),
+	$j.volumes[$vi].issues[$ii].articles[$ai] = article.new( 
+		title => parse-title( @title-elms[$ai] ),
+		pprange => parse-pprange( @title-elms[$ai] ),
+		authors => parse-authors( @author-elms[$ai] ),
+		abstract => parse-abstract( @abstr-elms[$ai] ),
+		oldurl => $art-oldurl,
+		
+	);
 	say "+++++++++++++++++++\n" if $verbose;
+##}
+
+sub url2id-issue( $url ) {
+#http://ejise.com/issue/download.html?idIssue=252
+	$url ~~ m|Issue\=(\d*)$|;
+	say "RefID:\n$0" if $verbose;
+	return $0
 }
 
 sub parse-title( $t ) {
 	my @a    = $t.elements(:TAG<a>);
 	my $res  = @a[0].firstChild().text.trim;
 	say "Title:\n$res" if $verbose;
-	@title-strs.push: $res;
+	return $res;
 }
 sub parse-pprange( $t ) {
 	my @span = $t.elements(:TAG<span>);
 	my $res  = @span[0].firstChild().text.trim;
 	say "Pages:\n$res" if $verbose;
-	@pp-ranges.push: $res;
-}
-#`[ transform from issuu url to download url
-http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p
-http://ejise.com/issue/download.html?idArticle=1084
--or- e.g. volume can already be in download form
-http://ejise.com/issue/download.html?idIssue=252
--and-
-ejise-volume23-issue1-article1084.pdf
-#]
-##sub get-art-number
-sub parse-oldurl( $t ) {
-	my @p    = $t.elements(:TAG<p>);
-	my @a    = @p[0].elements(:TAG<a>);
-	my $res  = @a[0].attribs<href>;
-	##my $fn   = $vol-title.lc;
-##say "fn is $fn";
-	unless $res ~~ m|download| {
-		$res ~~ m|article(\d*)\?mode|;
-		$res = qq|http://{$j.name}.com/issue/download.html?idArticle=$0|;
-		##$fn  = qq|ejise-volume23-issue1-article1084.pdf|;
-	}
-	say "OldUrl:\n$res" if $verbose;
-	@oldurl-strs.push: $res;
-	##say "Filename:\n$fn" if $verbose;
-	##@filenm-strs.push: $fn;
+	return $res;
 }
 sub parse-authors( $t ) {
 	my @a    = $t.elements(:TAG<a>);
@@ -193,14 +173,48 @@ sub parse-authors( $t ) {
 		say "$res" if $verbose;
 		@res.push: $res;
 	}
-	@author-strs.push: @res;
+	return @res;
 }
-sub parse-abstr( $t ) {
+sub parse-abstract( $t ) {
 	my $res  = $t.firstChild().text.trim;
 	$res ~~ s:global/\n//;
 	say "Abstract:\n$res" if $verbose;
-	@abstr-strs.push: $res;
+	return $res;
 }
+sub parse-oldurl( $t ) {
+	my @p    = $t.elements(:TAG<p>);
+	my @a    = @p[0].elements(:TAG<a>);
+	my $res  = @a[0].attribs<href>;
+	unless $res ~~ m|download| {
+		$res ~~ m|article(\d*)\?mode|;
+		$res = qq|http://{$j.name}.com/issue/download.html?idArticle=$0|;
+	}
+	say "OldUrl:\n$res" if $verbose;
+	return $res;
+}
+#`{{
+sub parse-ref-id( $t ) {
+	my $res  = $t.firstChild().text.trim;
+	$res ~~ s:global/\n//;
+	say "Abstract:\n$res" if $verbose;
+	return $res;
+}
+#`[ transform from issuu url to download url
+http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p
+http://ejise.com/issue/download.html?idArticle=1084
+-or- e.g. issue can already be in download form
+http://ejise.com/issue/download.html?idIssue=252
+-and-
+ejise-volume23-issue1-article1084.pdf
+#]
+##sub get-art-number
+	##my $fn   = $vol-title.lc;
+		##$fn  = qq|ejise-volume23-issue1-article1084.pdf|;
+	##say "Filename:\n$fn" if $verbose;
+}
+#}}
+
+say $j; die;
 
 #`[check length
 say @title-strs.elems;

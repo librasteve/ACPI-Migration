@@ -55,32 +55,87 @@ $fh.close;
 use XML;
 use HTML::Parser::XML;
 
-my $verbose = 1;
-my $journal = 'ejise';
-
 my $parser = HTML::Parser::XML.new;
 $parser.parse($html);
 my $d = $parser.xmldoc; # XML::Document
 
+my $verbose = 1;
+my $journal-name = 'elise';
+
+#### Define Structure ####
+
+class journal {
+	has $.name;
+	has @.volumes;
+}
+class volume {
+	has $.number;
+	has @.issues;
+}
+class issue {
+	has $.number;
+	has $.date;
+	#has $.pprange; #not needed(?)
+	#has @.authors; #not needed(?)
+	has $.oldurl;
+	has $.filename;
+	has @.articles;
+}
+class article {
+	has $.number;
+	has $.title;
+	has $.pprange;
+	has @.authors;
+	has $.abstract;
+	has $.oldurl;
+	has $.filename;
+}
+
+my $j = journal.new( 
+	name => $journal-name 
+);
+
+#### Parse Issue Page, Load Structure ####
+
 my @title-elms = $d.elements(:RECURSE(Inf), :class('article-title-container')); 
+my @author-elms = $d.elements(:RECURSE(Inf), :class('author-list')); 
+my @abstr-elms = $d.elements(:RECURSE(Inf), :class('article-description-text')); 
+my @oldurl-elms = $d.elements(:RECURSE(Inf), :class('article-sub-container')); 
+## drop these...
 my @title-strs;
 my @pp-ranges;
-my @author-elms = $d.elements(:RECURSE(Inf), :class('author-list')); 
 my @author-strs;
-my @abstr-elms = $d.elements(:RECURSE(Inf), :class('article-description-text')); 
 my @abstr-strs;
-my @oldurl-elms = $d.elements(:RECURSE(Inf), :class('article-sub-container')); 
 my @oldurl-strs;
+my @filenm-strs;
 
 say "===Volume Info===" if $verbose;
-my $volinf1 = @title-elms.splice(0,1).[0];
-parse-title( $volinf1 );
-my $vol-title = @title-strs.splice(0,1).[0];
-my $volinf2 = @author-elms.splice(0,1).[0];		#may need for Volime Editor(s)
-my $volinf3 = @oldurl-elms.splice(0,1).[0];
-parse-oldurl( $volinf3 );
-my $vol-oldurl = @oldurl-strs.splice(0,1).[0];
+#using splices to handle re-use of tag for volume/issue
+
+my $vit = parse-title( @title-elms.splice(0,1).[0] ).splice(0,1).[0]; 
+
+#eg. 'Volume 23 Issue 1 / Feb 2020'
+$vit ~~ m|Volume \s* (\d*) \s* Issue \s* (\d*) \s* \/ \s* (\w*\s+\d*)|;
+
+$j.volumes[0] = volume.new( 
+	number => +$0 
+);
 say "+++++++++++++++++++\n" if $verbose;
+
+say "===Issue Info===" if $verbose;
+#may need this later for Issue Editor(s)
+#my $iss-authors = @author-elms.splice(0,1).[0];
+my $iss-oldurl = parse-oldurl( @oldurl-elms.splice(0,1).[0] ).splice(0,1).[0];
+
+$j.volumes[0].issues[0] = issue.new( 
+	number => +$1, 
+	date   => ~$2, 
+	oldurl => $iss-oldurl,
+);
+say "+++++++++++++++++++\n" if $verbose;
+
+say $j;
+die;
 
 for 0..^@title-elms -> $i {
 	say "===Article No.$i===" if $verbose;
@@ -107,19 +162,27 @@ sub parse-pprange( $t ) {
 #`[ transform from issuu url to download url
 http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p
 http://ejise.com/issue/download.html?idArticle=1084
--or- can already be in download form
+-or- e.g. volume can already be in download form
 http://ejise.com/issue/download.html?idIssue=252
+-and-
+ejise-volume23-issue1-article1084.pdf
 #]
+##sub get-art-number
 sub parse-oldurl( $t ) {
 	my @p    = $t.elements(:TAG<p>);
 	my @a    = @p[0].elements(:TAG<a>);
 	my $res  = @a[0].attribs<href>;
+	##my $fn   = $vol-title.lc;
+##say "fn is $fn";
 	unless $res ~~ m|download| {
 		$res ~~ m|article(\d*)\?mode|;
-		$res = qq|http://$journal.com/issue/download.html?idArticle=$0|;
+		$res = qq|http://{$j.name}.com/issue/download.html?idArticle=$0|;
+		##$fn  = qq|ejise-volume23-issue1-article1084.pdf|;
 	}
 	say "OldUrl:\n$res" if $verbose;
 	@oldurl-strs.push: $res;
+	##say "Filename:\n$fn" if $verbose;
+	##@filenm-strs.push: $fn;
 }
 sub parse-authors( $t ) {
 	my @a    = $t.elements(:TAG<a>);

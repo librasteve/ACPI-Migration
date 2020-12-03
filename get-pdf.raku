@@ -76,7 +76,7 @@ class issue {
 	has $.number;
 	has $.date;
 	#has $.pprange; #not needed(?)
-	#has @.authors; #not needed(?)
+	has @.authors; #ie. editors
 	has $.oldurl;
 	has $.ref-id;
 	has $.filename;
@@ -92,15 +92,15 @@ class article {
 	has $.filename;
 }
 
+#### Parse Issue Page, Load Structure ####
+
 my $j = journal.new( 
 	name => $journal-name 
 );
 
-#### Parse Issue Page, Load Structure ####
-
-my @title-elms = $d.elements(:RECURSE(Inf), :class('article-title-container')); 
+my @title-elms  = $d.elements(:RECURSE(Inf), :class('article-title-container')); 
 my @author-elms = $d.elements(:RECURSE(Inf), :class('author-list')); 
-my @abstr-elms = $d.elements(:RECURSE(Inf), :class('article-description-text')); 
+my @abstr-elms  = $d.elements(:RECURSE(Inf), :class('article-description-text')); 
 my @oldurl-elms = $d.elements(:RECURSE(Inf), :class('article-sub-container')); 
 
 say "===Volume Info===" if $verbose;
@@ -111,47 +111,59 @@ my $vit = parse-title( @title-elms.splice(0,1).[0] );
 $vit ~~ m|Volume \s* (\d*) \s* Issue \s* (\d*) \s* \/ \s* (\w*\s+\d*)|;
 
 my $vi = 0;
-$j.volumes[$vi] = volume.new( 
+my $vol := $j.volumes[$vi]; 
+$vol = volume.new( 
 	number => +$0 
 );
 say "+++++++++++++++++++\n" if $verbose;
 
 say "===Issue Info===" if $verbose;
-#my $iss-authors = @author-elms.splice(0,1).[0]; #may need this later for Issue Editor(s)
+my $iss-authors = parse-authors( @author-elms.splice(0,1).[0] ); #may need this later
 my $iss-oldurl = parse-oldurl( @oldurl-elms.splice(0,1).[0] );
 
 my $ii = 0;
-$j.volumes[$vi].issues[$ii] = issue.new( 
-	number => +$1, 
-	date   => ~$2, 
-	oldurl => $iss-oldurl,
-	refid  => url2id-issue( $iss-oldurl ),
-##	filename => FIXME,
+my $iss := $vol.issues[$ii];
+$iss = issue.new( 
+	number  => +$1, 
+	date    => ~$2, 
+	oldurl  => $iss-oldurl,
+	authors => $iss-authors,
+	refid   => url2refid( $iss-oldurl ),
 );
+#$iss.filename = url2fn( :issue ); 
+
 say "+++++++++++++++++++\n" if $verbose;
 
-##for 1..@title-elms -> $ai {
-my $ai=1;
+for 1..@title-elms -> $ai {
 	say "===Article No.$ai===" if $verbose;
-	my $art-oldurl = parse-oldurl( @oldurl-elms[$ai] ),
-	$j.volumes[$vi].issues[$ii].articles[$ai] = article.new( 
-		title => parse-title( @title-elms[$ai] ),
-		pprange => parse-pprange( @title-elms[$ai] ),
-		authors => parse-authors( @author-elms[$ai] ),
-		abstract => parse-abstract( @abstr-elms[$ai] ),
-		oldurl => $art-oldurl,
-		
+
+	my $art-oldurl = parse-oldurl( @oldurl-elms[$ai-1] ),
+
+	$iss.articles[$ai-1] = article.new( 
+		title    => parse-title(    @title-elms[$ai-1] ),
+		pprange  => parse-pprange(  @title-elms[$ai-1] ),
+		authors  => parse-authors(  @author-elms[$ai-1] ),
+		abstract => parse-abstract( @abstr-elms[$ai-1] ),
+		oldurl   => $art-oldurl,
+		refid    => url2refid( $art-oldurl ),
 	);
 	say "+++++++++++++++++++\n" if $verbose;
-##}
-
-sub url2id-issue( $url ) {
+}
+#`[iamerejh
+sub url2fn( :$issue, :$article ) {
+	#ejise-volume23-issue1-article1084.pdf
+	if $issue {
+		return qq|$j.name
+	}
+}
+#]
+sub url2refid( $url ) {
 #http://ejise.com/issue/download.html?idIssue=252
-	$url ~~ m|Issue\=(\d*)$|;
+#http://elise.com/issue/download.html?idArticle=1085
+	$url ~~ m/id[Issue||Article] \= (\d*) $/;
 	say "RefID:\n$0" if $verbose;
 	return $0
 }
-
 sub parse-title( $t ) {
 	my @a    = $t.elements(:TAG<a>);
 	my $res  = @a[0].firstChild().text.trim;
@@ -182,6 +194,8 @@ sub parse-abstract( $t ) {
 	return $res;
 }
 sub parse-oldurl( $t ) {
+#http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p
+#http://ejise.com/issue/download.html?idArticle=1084 -or- issue already in download form
 	my @p    = $t.elements(:TAG<p>);
 	my @a    = @p[0].elements(:TAG<a>);
 	my $res  = @a[0].attribs<href>;
@@ -192,37 +206,8 @@ sub parse-oldurl( $t ) {
 	say "OldUrl:\n$res" if $verbose;
 	return $res;
 }
-#`{{
-sub parse-ref-id( $t ) {
-	my $res  = $t.firstChild().text.trim;
-	$res ~~ s:global/\n//;
-	say "Abstract:\n$res" if $verbose;
-	return $res;
-}
-#`[ transform from issuu url to download url
-http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p
-http://ejise.com/issue/download.html?idArticle=1084
--or- e.g. issue can already be in download form
-http://ejise.com/issue/download.html?idIssue=252
--and-
-ejise-volume23-issue1-article1084.pdf
-#]
-##sub get-art-number
-	##my $fn   = $vol-title.lc;
-		##$fn  = qq|ejise-volume23-issue1-article1084.pdf|;
-	##say "Filename:\n$fn" if $verbose;
-}
-#}}
 
 say $j; die;
-
-#`[check length
-say @title-strs.elems;
-say @pp-ranges.elems;
-say @author-strs.elems;
-say @abstr-strs.elems;
-say @oldurl-strs.elems;
-#]
 
 
 #`[ some useful XML lookup commmands

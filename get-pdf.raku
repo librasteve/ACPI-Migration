@@ -79,7 +79,7 @@ class issue {
 	has @.authors; #ie. editors
 	has $.oldurl;
 	has $.ref-id;
-	has $.filename;
+	has $.filename is rw;
 	has @.articles; #index is from 1 to n
 }
 class article {
@@ -89,7 +89,7 @@ class article {
 	has $.abstract;
 	has $.oldurl;
 	has $.ref-id;
-	has $.filename;
+	has $.filename is rw;
 }
 
 #### Parse Issue Page, Load Structure ####
@@ -128,10 +128,9 @@ $iss = issue.new(
 	date    => ~$2, 
 	oldurl  => $iss-oldurl,
 	authors => $iss-authors,
-	refid   => url2refid( $iss-oldurl ),
+	re-fid  => url2id( $iss-oldurl ),
 );
-#$iss.filename = url2fn( :issue ); 
-
+$iss.filename = url2fn( $iss ); 
 say "+++++++++++++++++++\n" if $verbose;
 
 for 1..@title-elms -> $ai {
@@ -139,30 +138,37 @@ for 1..@title-elms -> $ai {
 
 	my $art-oldurl = parse-oldurl( @oldurl-elms[$ai-1] ),
 
-	$iss.articles[$ai-1] = article.new( 
+	my $art := $iss.articles[$ai-1];
+	$art = article.new( 
 		title    => parse-title(    @title-elms[$ai-1] ),
 		pprange  => parse-pprange(  @title-elms[$ai-1] ),
 		authors  => parse-authors(  @author-elms[$ai-1] ),
 		abstract => parse-abstract( @abstr-elms[$ai-1] ),
 		oldurl   => $art-oldurl,
-		refid    => url2refid( $art-oldurl ),
+		ref-id   => url2id( $art-oldurl ),
 	);
+	$art.filename = url2fn( $iss, $art ); 
 	say "+++++++++++++++++++\n" if $verbose;
 }
-#`[iamerejh
-sub url2fn( :$issue, :$article ) {
-	#ejise-volume23-issue1-article1084.pdf
-	if $issue {
-		return qq|$j.name
+sub url2fn( $iss, $art? ) {
+	#EJISE-volume-23-issue-1.pdf
+	my $res;
+	if ! $art {
+		$res = qq|{$j.name.uc}-volume-{$vol.number}-issue-{$iss.number}.pdf|;
 	}
+	#ejise-volume23-issue1-article1084.pdf
+	else {
+		$res = qq|{$j.name}-volume{$vol.number}-issue{$iss.number}-article{$art.ref-id}.pdf|;
+	}
+	say "Filename:\n$res" if $verbose;
+	return $res;
 }
-#]
-sub url2refid( $url ) {
+sub url2id( $url ) {
 #http://ejise.com/issue/download.html?idIssue=252
 #http://elise.com/issue/download.html?idArticle=1085
 	$url ~~ m/id[Issue||Article] \= (\d*) $/;
 	say "RefID:\n$0" if $verbose;
-	return $0
+	return ~$0
 }
 sub parse-title( $t ) {
 	my @a    = $t.elements(:TAG<a>);
@@ -206,8 +212,6 @@ sub parse-oldurl( $t ) {
 	say "OldUrl:\n$res" if $verbose;
 	return $res;
 }
-
-say $j; die;
 
 
 #`[ some useful XML lookup commmands

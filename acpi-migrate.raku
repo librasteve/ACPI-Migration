@@ -68,6 +68,11 @@ class issue {
 	has $.id;
 	has $.filename is rw;
 	has @.articles; #index is from 1 to n
+
+	method year {	
+		$!date ~~ m|^\w**3 \s (\d*)$| or die "bad year";		#eg. 'Feb 2020'
+		return ~$0;
+	}
 }
 class article {
 	has $.id;
@@ -75,15 +80,20 @@ class article {
 	has $.abstract;
 	has @.keywords;
 	has @.authors;
-	has $.pprange;
+	has $.pages;
 	has $.oldurl;
 	has $.filename is rw;
+
+	method split-name( $author ) {
+		$author ~~ m|^(.*) \s (.*)$|;
+		return( ~$0, ~$1 )
+	}
 }
 
 my $j = journal.new( 
 	name => 'elise',
 	issn => 'ISSN 1566-6379',
-	copyrightHolder => 'Copyright © 1999-2021 Electronic Journal of Information Systems Evaluation',
+	copyrightHolder => 'Copyright &#169; 1999-2021 Electronic Journal of Information Systems Evaluation',
 );
 $j = parse-issue-page( $d, $j );		#say $j;
 
@@ -91,7 +101,31 @@ my $xml = generate-xml( $j );			say $xml;
 
 #### Generate XML ####
 sub generate-xml( $j ) {
-	my $verbose = 1;
+	my $ax = XML::Document.load('./ojs-templates/article-blank2.xml');
+
+	#### XML Subroutines ####
+	#| the recurse control makes this convenient, but a tad imprecise
+	sub insert-tag( $tag, $text ) {
+		$ax.elements(:TAG($tag) :RECURSE).first.insert( XML::Text.new( text => $text ) );
+	}
+	#| need this variant to deal with one or two duplicate tag names (eg. title)
+	sub insert-subtag( $tag, $text, $subtag ) {
+		my $sx = $ax.elements(:TAG($subtag)).first;
+		$sx.elements(:TAG($tag)).first.insert( XML::Text.new( text => $text ) );
+	}
+	sub insert-tag-to-elem( $elem, $tag, $text ) {
+		$elem.elements(:TAG($tag)).first.insert( XML::Text.new( text => $text ) );
+	}
+	sub get-node( $tag ) {
+		return $ax.elements(:TAG($tag) :RECURSE).first;
+	}
+	sub get-node-from-elem( $elem, $tag ) {
+		return $elem.elements(:TAG($tag) :RECURSE).first;
+	}
+	sub clean-abstract( $txt is copy ) {
+		$txt ~~ s:g|\& <-[\#]>|"&amp;"|;
+		return $txt;
+	}
 
 	my $vi = 0;
 	my $vol := $j.volumes[$vi]; 
@@ -99,62 +133,48 @@ sub generate-xml( $j ) {
 	my $ii = 0;
 	my $iss := $vol.issues[$ii];
 
-	my $ax = XML::Document.load('./ojs-templates/article-blank.xml');
-
 	#hardwire issue items for now FIXME
-	my @itags = <copyrightHolder copyrightYear issue_identification= number year title>; #?? how to do nested items
+	my @iss-tags = <copyrightHolder copyrightYear issue_identification= number year title>;
 
-	#the trailing () are required for a 'quoted method name'
-	insert-text( 'copyrightHolder', $j.copyrightHolder );      
-	insert-text( 'copyrightYear', date2year( $iss.date ) );      
+	insert-tag( 'copyrightHolder', $j.copyrightHolder );      
+	insert-tag( 'copyrightYear', $iss.year );      
+	insert-tag( 'number', $iss.number );
+	insert-tag( 'year',  $iss.year );
+	insert-subtag( 'title', qq|Volume {$vol.number} Issue {$iss.number} / {$iss.date}|, 'issue_identification' );
 
-	#### XML Subroutines ####
-	sub insert-text( $tag, $text ) {
-		$ax.elements(:TAG($tag)).first.insert( XML::Text.new( text => $text ) );
-	}
-	sub date2year( $date ) {
-		$date ~~ m|(\d*)|;		#eg. 'Feb 2020'
-say ~$0; #iamerejh
-		return ~$0;
-	}
-
-
-	my $cy = 2020;  #FIXME same as issue/volume year
-	my $in = 23;	#FIXME
-
-
-	say $ax; 
-	die;
+	my @art-tags = <id title abstract keywords= keyword authors= author= pages>; #FIXME load keywords
+	my @aut-tags = <firstname lastname affiliation country email orcid biography>;
 
 	for 1..1 -> $ai {
 	##for 1..$iss.articles.elems -> $ai {
-		say "===Article No.$ai===" if $verbose;
-
 		my $art := $iss.articles[$ai-1];
-#`[
-		my $id = $ax.elements(:TAG<id>).first;
-		$id.insert( XML::Text.new( text => 'Nah Monthly' ) );
 
-		$art = article.new( 
-			title    => parse-title(    @title-elms[$ai-1] ),
-			pprange  => parse-pprange(  @title-elms[$ai-1] ),
-			authors  => parse-authors(  @author-elms[$ai-1] ),
-			abstract => parse-abstract( @abstr-elms[$ai-1] ),
-			oldurl   => $art-oldurl,
-			id   => url2id( $art-oldurl ),
-		);
-		$art.filename = url2fn( $iss, $art ); 
-#]
-		say "+++++++++++++++++++\n" if $verbose;
+		insert-tag( 'id', $art.id );
+		insert-tag( 'title', $art.title );
+		insert-tag( 'abstract', clean-abstract( $art.abstract ) );
+		insert-tag( 'pages', $art.pages );
+		#insert-tag( 'keyword', $art.keyword );     #FIXME add keywords
+
+		my $a-top = get-node( 'authors' );					#say $a-top;
+		my $a-old = get-node-from-elem( $a-top, 'author' ); 
+		$a-old.remove;
+
+		#| synthesize & populate author & child tags
+		for 0..^$art.authors.elems -> $i {
+			my $naut = $a-top.insert( 'author', include_in_browser => "true", user_group_ref => "Author" ).first;
+			my ( $firstname, $lastname ) = $art.split-name( $art.authors[$i] );
+
+			for @aut-tags.reverse -> $aut-tag {
+				given $aut-tag {
+					when <firstname>                 { $naut.insert( $_, $firstname ) }
+					when <lastname>                  { $naut.insert( $_, $lastname ) }
+					when <affiliation biography>.any { $naut.insert( $_, " ", locale => "en_US" ) } 
+					default                          { $naut.insert( $_, " " ) }
+				}
+			}
+		} 
 	}
-
-
-	my @art-items = <id title abstract keywords= authors= pages>;  #FIXME load keywords
-
-
-
 	return $ax;
-
 }
 
 #### Load Structure from Old Issue Page ####
@@ -204,7 +224,7 @@ sub parse-issue-page( $d, $j ) {
 		my $art := $iss.articles[$ai-1];
 		$art = article.new( 
 			title    => parse-title(    @title-elms[$ai-1] ),
-			pprange  => parse-pprange(  @title-elms[$ai-1] ),
+			pages    => parse-pages(    @title-elms[$ai-1] ),
 			authors  => parse-authors(  @author-elms[$ai-1] ),
 			abstract => parse-abstract( @abstr-elms[$ai-1] ),
 			oldurl   => $art-oldurl,
@@ -242,7 +262,7 @@ sub parse-issue-page( $d, $j ) {
 		say "Title:\n$res" if $verbose;
 		return $res;
 	}
-	sub parse-pprange( $t ) {
+	sub parse-pages( $t ) {
 		my @span = $t.elements(:TAG<span>);
 		my $res  = @span[0].firstChild().text.trim;
 		say "Pages:\n$res" if $verbose;

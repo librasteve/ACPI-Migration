@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE issue PUBLIC "-//PKP//OJS Articles and Issues XML//EN" "http://pkp.sfu.ca/ojs/dtds/native.dtd">
-<article xmlns="http://pkp.sfu.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" locale="en_US" date_submitted="date" date_published="date" section_ref="name" seq="1" access_status="0" xsi:schemaLocation="http://pkp.sfu.ca native.xsd" stage="production">
+<article xmlns="http://pkp.sfu.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pkp.sfu.ca native.xsd" stage="production">
     <id type="internal" advice="ignore"></id>
-    <title locale="en_US"></title>
+	<title locale="en_US"></title>
     <abstract locale="en_US"></abstract>
     <copyrightHolder locale="en_US"></copyrightHolder>
     <copyrightYear></copyrightYear>
@@ -23,7 +23,7 @@
     <issue_identification>
       <number></number>
       <year></year>
-      <title locale="en_US"></title>
+	<title locale="en_US"></title>
     </issue_identification>
     <pages></pages>
   </article>

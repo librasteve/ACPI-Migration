@@ -122,7 +122,7 @@ sub generate-xml( $j ) {
 	sub get-node-from-elem( $elem, $tag ) {
 		return $elem.elements(:TAG($tag) :RECURSE).first;
 	}
-	sub clean-abstract( $txt is copy ) {
+	sub clean-text( $txt is copy ) {
 		$txt ~~ s:g|\& <-[\#]>|"&amp;"|;
 		return $txt;
 	}
@@ -151,9 +151,17 @@ sub generate-xml( $j ) {
 
 		insert-tag( 'id', $art.id );
 		insert-tag( 'title', $art.title );
-		insert-tag( 'abstract', clean-abstract( $art.abstract ) );
+		insert-tag( 'abstract', clean-text( $art.abstract ) );
 		insert-tag( 'pages', $art.pages );
-		#insert-tag( 'keyword', $art.keyword );     #FIXME add keywords
+
+		my $k-top = get-node( 'keywords' );					#say $k-top;
+		my $k-old = get-node-from-elem( $k-top, 'keyword' ); 
+		$k-old.remove;
+
+		#| synthesize & populate keyword tags
+		for $art.keywords -> $kw {
+			$k-top.insert( 'keyword', clean-text( $kw ) );
+		} 
 
 		my $a-top = get-node( 'authors' );					#say $a-top;
 		my $a-old = get-node-from-elem( $a-top, 'author' ); 
@@ -161,15 +169,15 @@ sub generate-xml( $j ) {
 
 		#| synthesize & populate author & child tags
 		for 0..^$art.authors.elems -> $i {
-			my $naut = $a-top.insert( 'author', include_in_browser => "true", user_group_ref => "Author" ).first;
+			my $n-aut = $a-top.insert( 'author', include_in_browser => "true", user_group_ref => "Author" ).first;
 			my ( $firstname, $lastname ) = $art.split-name( $art.authors[$i] );
 
 			for @aut-tags.reverse -> $aut-tag {
 				given $aut-tag {
-					when <firstname>                 { $naut.insert( $_, $firstname ) }
-					when <lastname>                  { $naut.insert( $_, $lastname ) }
-					when <affiliation biography>.any { $naut.insert( $_, " ", locale => "en_US" ) } 
-					default                          { $naut.insert( $_, " " ) }
+					when <firstname>                 { $n-aut.insert( $_, $firstname ) }
+					when <lastname>                  { $n-aut.insert( $_, $lastname ) }
+					when <affiliation biography>.any { $n-aut.insert( $_, " ", locale => "en_US" ) } 
+					default                          { $n-aut.insert( $_, " " ) }
 				}
 			}
 		} 
@@ -181,10 +189,17 @@ sub generate-xml( $j ) {
 sub parse-issue-page( $d, $j ) {
 	my $verbose = 0;
 
-	my @title-elms  = $d.elements(:RECURSE(Inf), :class('article-title-container')); 
-	my @author-elms = $d.elements(:RECURSE(Inf), :class('author-list')); 
-	my @abstr-elms  = $d.elements(:RECURSE(Inf), :class('article-description-text')); 
-	my @oldurl-elms = $d.elements(:RECURSE(Inf), :class('article-sub-container')); 
+	my @title-elms   = $d.elements(:RECURSE(Inf), :class('article-title-container')); 
+	my @author-elms  = $d.elements(:RECURSE(Inf), :class('author-list')); 
+	my @abstr-elms   = $d.elements(:RECURSE(Inf), :class('article-description-text')); 
+	my @oldurl-elms  = $d.elements(:RECURSE(Inf), :class('article-sub-container')); 
+
+	#| keywords class is duplicated - so need to keep only even elms
+	my @keyword-elms = $d.elements(:RECURSE(Inf), :class('article-description-keywords')); 
+	my @keyword-elms2;
+	for 0..^@keyword-elms -> $k {
+		@keyword-elms2.push: @keyword-elms[$k] if $k %% 2;
+	}
 
 	say "===Volume Info===" if $verbose;
 	#using splices to handle re-use of tag for volume/issue
@@ -200,8 +215,10 @@ sub parse-issue-page( $d, $j ) {
 	);
 	say "+++++++++++++++++++\n" if $verbose;
 
+
 	say "===Issue Info===" if $verbose;
 	my $iss-authors = parse-authors( @author-elms.splice(0,1).[0] ); #may need this later
+	my $iss-keywords = parse-keywords( @keyword-elms2.splice(0,1).[0] ); #may need this later
 	my $iss-oldurl = parse-oldurl( @oldurl-elms.splice(0,1).[0] );
 
 	my $ii = 0;
@@ -227,10 +244,13 @@ sub parse-issue-page( $d, $j ) {
 			pages    => parse-pages(    @title-elms[$ai-1] ),
 			authors  => parse-authors(  @author-elms[$ai-1] ),
 			abstract => parse-abstract( @abstr-elms[$ai-1] ),
+			keywords => parse-keywords( @keyword-elms2[$ai-1] ),
 			oldurl   => $art-oldurl,
 			id => url2id( $art-oldurl ),
 		);
+
 		$art.filename = url2fn( $iss, $art ); 
+
 		say "+++++++++++++++++++\n" if $verbose;
 	}
 
@@ -284,6 +304,17 @@ sub parse-issue-page( $d, $j ) {
 		$res ~~ s:global/\n//;
 		say "Abstract:\n$res" if $verbose;
 		return $res;
+	}
+	sub parse-keywords( $t ) {
+		my @a    = $t.elements(:TAG<a>);
+		my @res;
+		say "Keywords:" if $verbose;
+		for 0..^@a -> $j {
+			my $res  = @a[$j].firstChild().text.trim;
+			say "$res" if $verbose;
+			@res.push: $res;
+		}
+		return @res;
 	}
 	sub parse-oldurl( $t ) {
 	#http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p

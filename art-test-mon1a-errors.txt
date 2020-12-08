@@ -1,9 +1,0 @@
-Validation errors:
-
-Element '{http://pkp.sfu.ca}article', attribute 'date_submitted': 'date' is not a valid value of the atomic type 'xs:date'.
-Element '{http://pkp.sfu.ca}article', attribute 'seq': The attribute 'seq' is not allowed.
-Element '{http://pkp.sfu.ca}article', attribute 'access_status': The attribute 'access_status' is not allowed.
-Element '{http://pkp.sfu.ca}article', attribute 'section_ref': The attribute 'section_ref' is not allowed.
-Element '{http://pkp.sfu.ca}article', attribute 'date_published': The attribute 'date_published' is not allowed.
-Element '{http://pkp.sfu.ca}article', attribute 'locale': The attribute 'locale' is not allowed.
-Element '{http://pkp.sfu.ca}title': This element is not expected. Expected is one of ( {http://pkp.sfu.ca}id, {http://pkp.sfu.ca}submission_file, {http://pkp.sfu.ca}artwork_file, {http://pkp.sfu.ca}supplementary_file, {http://pkp.sfu.ca}pkppublication, {http://pkp.sfu.ca}publication ).

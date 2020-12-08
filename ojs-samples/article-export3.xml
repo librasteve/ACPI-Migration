@@ -1,25 +1,6 @@
-
 <?xml version="1.0"?>
 <article xmlns="http://pkp.sfu.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" date_submitted="2020-11-03" status="3" submission_progress="0" current_publication_id="5" stage="production" xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
   <id type="internal" advice="ignore">5</id>
-  <submission_file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" stage="submission" id="16" xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
-    <revision number="1" genre="Article Text" filename="ejise-volume21-issue1-article1054.pdf" viewable="true" date_uploaded="2020-11-03" date_modified="2020-11-03" filesize="978302" filetype="application/pdf" uploader="johnsmith">
-      <name locale="en_US">johnsmith, ejise-volume21-issue1-article1054.pdf</name>
-      <embed encoding="base64">JVBERi0xL....jVFT0Y=</embed>
-    </revision>
-  </submission_file>
-  <submission_file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" stage="review_file" id="20" xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
-    <revision number="1" source="16-1" genre="Article Text" filename="ejise-volume21-issue1-article1054.pdf" viewable="true" date_uploaded="2020-11-03" date_modified="2020-11-03" filesize="978302" filetype="application/pdf" uploader="johnsmith">
-      <name locale="en_US">Article Text, ejise-volume21-issue1-article1054.pdf</name>
-      <embed encoding="base64">JVBERi0...T0Y=</embed>
-    </revision>
-  </submission_file>
-  <submission_file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" stage="final" id="17" xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
-    <revision number="1" source="16-1" genre="Article Text" filename="ejise-volume21-issue1-article1054.pdf" viewable="true" date_uploaded="2020-11-03" date_modified="2020-11-03" filesize="978302" filetype="application/pdf" uploader="johnsmith">
-      <name locale="en_US">johnsmith, ejise-volume21-issue1-article1054.pdf</name>
-      <embed encoding="base64">JVBERi0...T0Y=</embed>
-    </revision>
-  </submission_file>
   <publication xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" locale="en_US" version="1" status="3" primary_contact_id="5" url_path="" seq="0" date_published="2020-11-03" section_ref="ART" access_status="0" xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
     <id type="internal" advice="ignore">5</id>
     <id type="doi" advice="update">10.34190/et.21.1.5</id>
@@ -50,9 +31,9 @@
     </article_galley>
     <issue_identification>
       <volume>21</volume>
-      <number>1</number>
+      <number>2</number>
       <year>2018</year>
-      <title locale="en_US">Volume 21 Issue 1 / Feb 2018</title>
+      <title locale="en_US">Volume 21 Issue 2 / Feb 2018</title>
     </issue_identification>
   </publication>
 </article>

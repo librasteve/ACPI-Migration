@@ -1,4 +1,5 @@
 #!/usr/bin/env raku 
+#acpi-migrate2.raku
 
 #`[ todos
 -loop of loops
@@ -53,6 +54,7 @@ my $d = $parser.xmldoc; # XML::Document
 #### Define Structure ####
 class journal {
 	has $.name;
+	has $.url;
 	has $.issn;
 	has $.copyrightHolder;
 	has @.volumes;
@@ -75,6 +77,7 @@ class issue {
 	}
 }
 class article {
+	#synonymous with publication
 	has $.id;
 	has $.title;
 	has $.abstract;
@@ -88,44 +91,61 @@ class article {
 		$author ~~ m|^(.*) \s (.*)$|;
 		return( ~$0, ~$1 )
 	}
+	method make-email( $author, $j ) {
+		my ( $given, $family ) = self.split-name( $author );
+		$given ~~ s:g|\s|\.|;
+		return qq|$given.$family\@{$j.url}|;
+	}
+	method make-username( $author ) {
+		my ( $given, $family ) = self.split-name( $author );
+		$given ~~ s:g|\s|\-|;
+		return qq|$given-$family|;
+	}
 }
 
 my $j = journal.new( 
 	name => 'elise',
+	url  => 'elise.com',
 	issn => 'ISSN 1566-6379',
 	copyrightHolder => 'Copyright &#169; 1999-2021 Electronic Journal of Information Systems Evaluation',
 );
 $j = parse-issue-page( $d, $j );		#say $j;
 
-my $xml = generate-xml( $j );			say $xml;
+my ( $art-xml, $use-xml ) = generate-xml( $j );			
+say $art-xml; 
+#say $use-xml;
 
 #### Generate XML ####
 sub generate-xml( $j ) {
-	my $ax = XML::Document.load('./ojs-templates/article-blank2.xml');
 
 	#### XML Subroutines ####
 	#| the recurse control makes this convenient, but a tad imprecise
-	sub insert-tag( $tag, $text ) {
-		$ax.elements(:TAG($tag) :RECURSE).first.insert( XML::Text.new( text => $text ) );
+	sub insert-tag( $dx, $tag, $text ) {
+		$dx.elements(:TAG($tag) :RECURSE).first.insert( XML::Text.new( text => $text ) );
 	}
 	#| need this variant to deal with one or two duplicate tag names (eg. title)
-	sub insert-subtag( $tag, $text, $subtag ) {
-		my $sx = $ax.elements(:TAG($subtag)).first;
+	sub insert-subtag( $dx, $tag, $text, $subtag ) {
+		my $sx = $dx.elements(:TAG($subtag) :RECURSE).first;
 		$sx.elements(:TAG($tag)).first.insert( XML::Text.new( text => $text ) );
 	}
 	sub insert-tag-to-elem( $elem, $tag, $text ) {
 		$elem.elements(:TAG($tag)).first.insert( XML::Text.new( text => $text ) );
 	}
-	sub get-node( $tag ) {
-		return $ax.elements(:TAG($tag) :RECURSE).first;
+	sub get-node( $dx, $tag ) {
+		return $dx.elements(:TAG($tag) :RECURSE).first;
 	}
 	sub get-node-from-elem( $elem, $tag ) {
 		return $elem.elements(:TAG($tag) :RECURSE).first;
 	}
 	sub clean-text( $txt is copy ) {
-		$txt ~~ s:g|\& <-[\#]>|"&amp;"|;
+		$txt ~~ s:g|(\& <!before <[\#]> >)|"&amp;"|;
 		return $txt;
 	}
+
+	#### Issue XML Substitutions ####
+
+	my $ax = XML::Document.load('./ojs-templates/article-blank-cd14.xml');
+	my $ux = XML::Document.load('./ojs-templates/users-blank-cd2.xml');
 
 	my $vi = 0;
 	my $vol := $j.volumes[$vi]; 
@@ -133,28 +153,44 @@ sub generate-xml( $j ) {
 	my $ii = 0;
 	my $iss := $vol.issues[$ii];
 
+	#hardwire some article & publication attributes for now FIXME
+	my @art-attrs = <current_publication_id	date_submitted stage status submission_progress>; 
+	my $art-node = $ax;
+	$art-node.attribs<current_publication_id> = '4'; #or make this $art.id?
+	$art-node.attribs<date_submitted> = '2020-12-25';
+
+	my $pub-node = get-node( $ax, 'publication' );
+	$pub-node.attribs<date_published> = '2020-12-25',	say $pub-node.attribs;
+#iamerejh not working
+	my $pub-id = get-node-from-elem( $pub-node, 'id' ); #say $pub-id; #leave both at 4 for now
+die "yo";
+
 	#hardwire issue items for now FIXME
 	my @iss-tags = <copyrightHolder copyrightYear issue_identification= number year title>;
 
-	insert-tag( 'copyrightHolder', $j.copyrightHolder );      
-	insert-tag( 'copyrightYear', $iss.year );      
-	insert-tag( 'number', $iss.number );
-	insert-tag( 'year',  $iss.year );
-	insert-subtag( 'title', qq|Volume {$vol.number} Issue {$iss.number} / {$iss.date}|, 'issue_identification' );
+	insert-tag( $ax, 'copyrightHolder', $j.copyrightHolder );      
+	insert-tag( $ax, 'copyrightYear', $iss.year );      
+	insert-tag( $ax, 'number', $iss.number );
+	insert-tag( $ax, 'year',  $iss.year );
+	insert-tag( $ax, 'volume',  $vol.number );
+	insert-subtag( $ax, 'title', 
+		qq|Volume {$vol.number} Issue {$iss.number} / {$iss.date}|, 'issue_identification' );
 
-	my @art-tags = <id title abstract keywords= keyword authors= author= pages>; #FIXME load keywords
-	my @aut-tags = <firstname lastname affiliation country email orcid biography>;
+	my @art-tags = <id title abstract keywords= keyword authors= author= pages>;
 
 	for 1..1 -> $ai {
 	##for 1..$iss.articles.elems -> $ai {
+
+		#### Article XML Substitutions ####
+
 		my $art := $iss.articles[$ai-1];
 
-		insert-tag( 'id', $art.id );
-		insert-tag( 'title', $art.title );
-		insert-tag( 'abstract', clean-text( $art.abstract ) );
-		insert-tag( 'pages', $art.pages );
+		insert-tag( $ax, 'id', $art.id );							#ie. article id = 1084
+		insert-tag( $ax, 'title', $art.title );
+		insert-tag( $ax, 'abstract', clean-text( $art.abstract ) );
+		insert-tag( $ax, 'pages', $art.pages );
 
-		my $k-top = get-node( 'keywords' );					#say $k-top;
+		my $k-top = get-node( $ax, 'keywords' );					#say $k-top;
 		my $k-old = get-node-from-elem( $k-top, 'keyword' ); 
 		$k-old.remove;
 
@@ -163,26 +199,72 @@ sub generate-xml( $j ) {
 			$k-top.insert( 'keyword', clean-text( $kw ) );
 		} 
 
-		my $a-top = get-node( 'authors' );					#say $a-top;
+		##my @aut-tags = <givenname familyname affiliation country email username orcid biography>;
+		my @aut-tags = <givenname familyname email username>;   #omit empty tags "less is more"
+
+		my $a-top = get-node( $ax, 'authors' );					#say $a-top;
 		my $a-old = get-node-from-elem( $a-top, 'author' ); 
 		$a-old.remove;
 
 		#| synthesize & populate author & child tags
 		for 0..^$art.authors.elems -> $i {
-			my $n-aut = $a-top.insert( 'author', include_in_browser => "true", user_group_ref => "Author" ).first;
-			my ( $firstname, $lastname ) = $art.split-name( $art.authors[$i] );
+			my $n-aut = $a-top.insert( 'author', 
+				#include_in_browser => "true", #not allowed ?
+				user_group_ref => "Author",
+				seq => $i,
+				id => $art.id * 10 + $i,
+			).first;
+			my ( $givenname, $familyname ) = $art.split-name( $art.authors[$i] );
+			my $email = $art.make-email( $art.authors[$i], $j );
+			my $username = $art.make-username( $art.authors[$i] );
 
 			for @aut-tags.reverse -> $aut-tag {
 				given $aut-tag {
-					when <firstname>                 { $n-aut.insert( $_, $firstname ) }
-					when <lastname>                  { $n-aut.insert( $_, $lastname ) }
-					when <affiliation biography>.any { $n-aut.insert( $_, " ", locale => "en_US" ) } 
-					default                          { $n-aut.insert( $_, " " ) }
+					when <givenname>   { $n-aut.insert( $_, $givenname,  locale => "en_US" ) }
+					when <familyname>  { $n-aut.insert( $_, $familyname, locale => "en_US" ) }
+					when <email>       { $n-aut.insert( $_, $email,      				   ) }
+					when <username>    { $n-aut.insert( $_, $username,     				   ) }
+				}
+			}
+		} 
+
+		#### Users XML Substitutions ####
+
+		my @use-tags = <givenname familyname email username>;
+		#also need to handcrank user_group_ref password= value 
+
+		my $u-top = get-node( $ux, 'users' );					#say $u-top;
+		my $u-old = get-node-from-elem( $u-top, 'user' ); 
+		$u-old.remove;
+
+		#| synthesize & populate user & child tags
+		for 0..^$art.authors.elems -> $i {
+			my $n-use = $u-top.insert( 'user' ).first;
+
+			my ( $givenname, $familyname ) = $art.split-name( $art.authors[$i] );
+			my $email = $art.make-email( $art.authors[$i], $j );
+			my $username = $art.make-username( $art.authors[$i] );
+
+			$n-use.insert( 'user_group_ref', 'Author' );
+			my $n-pass = $n-use.insert( 'password',
+				encryption => "sha1",
+				is_disabled => "false",
+				must_change => "false",
+			).first;
+			$n-pass.insert( 'value' );						#say $n-pass;
+
+			for @use-tags.reverse -> $use-tag {
+				given $use-tag {
+					when <givenname>   { $n-use.insert( $_, $givenname,  locale => "en_US" ) }
+					when <familyname>  { $n-use.insert( $_, $familyname, locale => "en_US" ) }
+					when <email>       { $n-use.insert( $_, $email,      				   ) }
+					when <username>    { $n-use.insert( $_, $username,     				   ) }
 				}
 			}
 		} 
 	}
-	return $ax;
+
+	return $ax, $ux;
 }
 
 #### Load Structure from Old Issue Page ####

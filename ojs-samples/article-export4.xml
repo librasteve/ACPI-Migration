@@ -23,17 +23,11 @@
         <orcid>https://orcid.org/0000-0002-8909-5311</orcid>
       </author>
     </authors>
-    <article_galley xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" locale="en_US" approved="false" xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
-      <id type="internal" advice="ignore">3</id>
-      <name locale="en_US">PDF</name>
-      <seq>0</seq>
-      <submission_file_ref id="18" revision="1"/>
-    </article_galley>
     <issue_identification>
       <volume>21</volume>
-      <number>2</number>
+      <number>1</number>
       <year>2018</year>
-      <title locale="en_US">Volume 21 Issue 2 / Feb 2018</title>
+      <title locale="en_US">Volume 21 Issue 1 / Feb 2018</title>
     </issue_identification>
   </publication>
 </article>

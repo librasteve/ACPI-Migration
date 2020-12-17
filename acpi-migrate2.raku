@@ -6,7 +6,7 @@
 -error / sanity checking
 -move pdf / new url
 -handle issn (journal.issn?)
--gen article.xml
+-gen issue.xml
 #]
 
 #`[ items 
@@ -117,7 +117,6 @@ say $art-xml;
 
 #### Generate XML ####
 sub generate-xml( $j ) {
-
 	#### XML Subroutines ####
 	#| the recurse control makes this convenient, but a tad imprecise
 	sub insert-tag( $dx, $tag, $text ) {
@@ -138,7 +137,7 @@ sub generate-xml( $j ) {
 		return $elem.elements(:TAG($tag) :RECURSE).first;
 	}
 	sub clean-text( $txt is copy ) {
-		$txt ~~ s:g|(\& <!before <[\#]> >)|"&amp;"|;
+		$txt ~~ s:g|(\& <!before <[\#]> >)|&amp;|;
 		return $txt;
 	}
 
@@ -156,14 +155,14 @@ sub generate-xml( $j ) {
 	#hardwire some article & publication attributes for now FIXME
 	my @art-attrs = <current_publication_id	date_submitted stage status submission_progress>; 
 	my $art-node = $ax;
-	$art-node.attribs<current_publication_id> = '4'; #or make this $art.id?
+	$art-node.attribs<current_publication_id> = '4';						#or make this $art.id?
 	$art-node.attribs<date_submitted> = '2020-12-25';
 
 	my $pub-node = get-node( $ax, 'publication' );
-	$pub-node.attribs<date_published> = '2020-12-25',	say $pub-node.attribs;
-#iamerejh not working
-	my $pub-id = get-node-from-elem( $pub-node, 'id' ); #say $pub-id; #leave both at 4 for now
-die "yo";
+	$pub-node.attribs<date_published> = '2020-12-25';
+	my $pub-id = get-node-from-elem( $pub-node, 'id' ); 
+	$pub-id.remove;
+	$pub-node.insert( 'id', 4, type => 'internal', advice => 'ignore' );	#leave both at 4 for now
 
 	#hardwire issue items for now FIXME
 	my @iss-tags = <copyrightHolder copyrightYear issue_identification= number year title>;
@@ -178,14 +177,14 @@ die "yo";
 
 	my @art-tags = <id title abstract keywords= keyword authors= author= pages>;
 
-	for 1..1 -> $ai {
+	for 1..2 -> $ai {
 	##for 1..$iss.articles.elems -> $ai {
 
 		#### Article XML Substitutions ####
 
 		my $art := $iss.articles[$ai-1];
 
-		insert-tag( $ax, 'id', $art.id );							#ie. article id = 1084
+		insert-subtag( $ax, 'article', $art.id, 'id' ); #ie. article id = 1084
 		insert-tag( $ax, 'title', $art.title );
 		insert-tag( $ax, 'abstract', clean-text( $art.abstract ) );
 		insert-tag( $ax, 'pages', $art.pages );
@@ -200,7 +199,7 @@ die "yo";
 		} 
 
 		##my @aut-tags = <givenname familyname affiliation country email username orcid biography>;
-		my @aut-tags = <givenname familyname email username>;   #omit empty tags "less is more"
+		my @aut-tags = <givenname familyname email>;   #omit empty tags "less is more"
 
 		my $a-top = get-node( $ax, 'authors' );					#say $a-top;
 		my $a-old = get-node-from-elem( $a-top, 'author' ); 
@@ -216,14 +215,12 @@ die "yo";
 			).first;
 			my ( $givenname, $familyname ) = $art.split-name( $art.authors[$i] );
 			my $email = $art.make-email( $art.authors[$i], $j );
-			my $username = $art.make-username( $art.authors[$i] );
 
 			for @aut-tags.reverse -> $aut-tag {
 				given $aut-tag {
 					when <givenname>   { $n-aut.insert( $_, $givenname,  locale => "en_US" ) }
 					when <familyname>  { $n-aut.insert( $_, $familyname, locale => "en_US" ) }
 					when <email>       { $n-aut.insert( $_, $email,      				   ) }
-					when <username>    { $n-aut.insert( $_, $username,     				   ) }
 				}
 			}
 		} 

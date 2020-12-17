@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article current_publication_id="4" date_submitted="2020-11-02"
+         stage="externalReview" status="3" submission_progress="0"
+         xsi:schemaLocation="http://pkp.sfu.ca native.xsd"
+         xmlns="http://pkp.sfu.ca"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns="http://pkp.sfu.ca">
+  <id advice="ignore" type="internal">1084</id>
+
+  <publication access_status="0" date_published="2020-11-02" locale="en_US"
+               primary_contact_id="4" section_ref="ART" seq="0" status="3"
+               url_path="" version="1"
+               xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
+    <id advice="ignore" type="internal">4</id>
+
+    <title locale="en_US"/>
+
+    <abstract locale="en_US"/>
+
+    <copyrightHolder locale="en_US"/>
+
+    <copyrightYear/>
+
+    <keywords locale="en_US">
+      <keyword/>
+    </keywords>
+
+    <authors xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
+      <author user_group_ref="Author">
+        <givenname locale="en_US"/>
+
+        <familyname locale="en_US"/>
+
+        <email/>
+      </author>
+    </authors>
+
+    <issue_identification>
+      <volume/>
+
+      <number/>
+
+      <year/>
+
+      <title locale="en_US"/>
+    </issue_identification>
+  </publication>
+</article>

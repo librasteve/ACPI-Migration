@@ -1,0 +1,2595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PKPUsers xsi:schemaLocation="http://pkp.sfu.ca pkp-users.xsd"
+          xmlns="http://pkp.sfu.ca"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:ns="http://pkp.sfu.ca">
+  <user_groups xsi:schemaLocation="http://pkp.sfu.ca pkp-users.xsd">
+    <user_group>
+      <role_id>16</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>true</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.manager##</name>
+
+      <name locale="ca_ES">##default.groups.name.manager##</name>
+
+      <name locale="cs_CZ">##default.groups.name.manager##</name>
+
+      <name locale="da_DK">##default.groups.name.manager##</name>
+
+      <name locale="de_DE">##default.groups.name.manager##</name>
+
+      <name locale="en_US">Journal manager</name>
+
+      <name locale="es_ES">##default.groups.name.manager##</name>
+
+      <name locale="eu_ES">##default.groups.name.manager##</name>
+
+      <name locale="fa_IR">##default.groups.name.manager##</name>
+
+      <name locale="fi_FI">##default.groups.name.manager##</name>
+
+      <name locale="fr_CA">##default.groups.name.manager##</name>
+
+      <name locale="fr_FR">##default.groups.name.manager##</name>
+
+      <name locale="hi_IN">##default.groups.name.manager##</name>
+
+      <name locale="hr_HR">##default.groups.name.manager##</name>
+
+      <name locale="hu_HU">##default.groups.name.manager##</name>
+
+      <name locale="id_ID">##default.groups.name.manager##</name>
+
+      <name locale="it_IT">##default.groups.name.manager##</name>
+
+      <name locale="ku_IQ">##default.groups.name.manager##</name>
+
+      <name locale="nb_NO">##default.groups.name.manager##</name>
+
+      <name locale="nl_NL">##default.groups.name.manager##</name>
+
+      <name locale="pl_PL">##default.groups.name.manager##</name>
+
+      <name locale="pt_BR">##default.groups.name.manager##</name>
+
+      <name locale="pt_PT">##default.groups.name.manager##</name>
+
+      <name locale="ru_RU">##default.groups.name.manager##</name>
+
+      <name locale="sl_SI">##default.groups.name.manager##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.manager##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.manager##</name>
+
+      <name locale="sv_SE">##default.groups.name.manager##</name>
+
+      <name locale="tr_TR">##default.groups.name.manager##</name>
+
+      <name locale="uk_UA">##default.groups.name.manager##</name>
+
+      <name locale="vi_VN">##default.groups.name.manager##</name>
+
+      <name locale="zh_CN">##default.groups.name.manager##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="en_US">JM</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="sr_RS@latin">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.manager##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.manager##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>16</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>true</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.editor##</name>
+
+      <name locale="ca_ES">##default.groups.name.editor##</name>
+
+      <name locale="cs_CZ">##default.groups.name.editor##</name>
+
+      <name locale="da_DK">##default.groups.name.editor##</name>
+
+      <name locale="de_DE">##default.groups.name.editor##</name>
+
+      <name locale="en_US">Journal editor</name>
+
+      <name locale="es_ES">##default.groups.name.editor##</name>
+
+      <name locale="eu_ES">##default.groups.name.editor##</name>
+
+      <name locale="fa_IR">##default.groups.name.editor##</name>
+
+      <name locale="fi_FI">##default.groups.name.editor##</name>
+
+      <name locale="fr_CA">##default.groups.name.editor##</name>
+
+      <name locale="fr_FR">##default.groups.name.editor##</name>
+
+      <name locale="hi_IN">##default.groups.name.editor##</name>
+
+      <name locale="hr_HR">##default.groups.name.editor##</name>
+
+      <name locale="hu_HU">##default.groups.name.editor##</name>
+
+      <name locale="id_ID">##default.groups.name.editor##</name>
+
+      <name locale="it_IT">##default.groups.name.editor##</name>
+
+      <name locale="ku_IQ">##default.groups.name.editor##</name>
+
+      <name locale="nb_NO">##default.groups.name.editor##</name>
+
+      <name locale="nl_NL">##default.groups.name.editor##</name>
+
+      <name locale="pl_PL">##default.groups.name.editor##</name>
+
+      <name locale="pt_BR">##default.groups.name.editor##</name>
+
+      <name locale="pt_PT">##default.groups.name.editor##</name>
+
+      <name locale="ru_RU">##default.groups.name.editor##</name>
+
+      <name locale="sl_SI">##default.groups.name.editor##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.editor##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.editor##</name>
+
+      <name locale="sv_SE">##default.groups.name.editor##</name>
+
+      <name locale="tr_TR">##default.groups.name.editor##</name>
+
+      <name locale="uk_UA">##default.groups.name.editor##</name>
+
+      <name locale="vi_VN">##default.groups.name.editor##</name>
+
+      <name locale="zh_CN">##default.groups.name.editor##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="en_US">JE</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="sr_RS@latin">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.editor##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.editor##</abbrev>
+
+      <stage_assignments>1:3:4:5</stage_assignments>
+    </user_group>
+
+    <user_group>
+      <role_id>16</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>true</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.productionEditor##</name>
+
+      <name locale="ca_ES">##default.groups.name.productionEditor##</name>
+
+      <name locale="cs_CZ">##default.groups.name.productionEditor##</name>
+
+      <name locale="da_DK">##default.groups.name.productionEditor##</name>
+
+      <name locale="de_DE">##default.groups.name.productionEditor##</name>
+
+      <name locale="en_US">Production editor</name>
+
+      <name locale="es_ES">##default.groups.name.productionEditor##</name>
+
+      <name locale="eu_ES">##default.groups.name.productionEditor##</name>
+
+      <name locale="fa_IR">##default.groups.name.productionEditor##</name>
+
+      <name locale="fi_FI">##default.groups.name.productionEditor##</name>
+
+      <name locale="fr_CA">##default.groups.name.productionEditor##</name>
+
+      <name locale="fr_FR">##default.groups.name.productionEditor##</name>
+
+      <name locale="hi_IN">##default.groups.name.productionEditor##</name>
+
+      <name locale="hr_HR">##default.groups.name.productionEditor##</name>
+
+      <name locale="hu_HU">##default.groups.name.productionEditor##</name>
+
+      <name locale="id_ID">##default.groups.name.productionEditor##</name>
+
+      <name locale="it_IT">##default.groups.name.productionEditor##</name>
+
+      <name locale="ku_IQ">##default.groups.name.productionEditor##</name>
+
+      <name locale="nb_NO">##default.groups.name.productionEditor##</name>
+
+      <name locale="nl_NL">##default.groups.name.productionEditor##</name>
+
+      <name locale="pl_PL">##default.groups.name.productionEditor##</name>
+
+      <name locale="pt_BR">##default.groups.name.productionEditor##</name>
+
+      <name locale="pt_PT">##default.groups.name.productionEditor##</name>
+
+      <name locale="ru_RU">##default.groups.name.productionEditor##</name>
+
+      <name locale="sl_SI">##default.groups.name.productionEditor##</name>
+
+      <name
+      locale="sr_RS@cyrillic">##default.groups.name.productionEditor##</name>
+
+      <name
+      locale="sr_RS@latin">##default.groups.name.productionEditor##</name>
+
+      <name locale="sv_SE">##default.groups.name.productionEditor##</name>
+
+      <name locale="tr_TR">##default.groups.name.productionEditor##</name>
+
+      <name locale="uk_UA">##default.groups.name.productionEditor##</name>
+
+      <name locale="vi_VN">##default.groups.name.productionEditor##</name>
+
+      <name locale="zh_CN">##default.groups.name.productionEditor##</name>
+
+      <abbrev
+      locale="ar_IQ">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="ca_ES">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="cs_CZ">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="da_DK">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="de_DE">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev locale="en_US">ProdE</abbrev>
+
+      <abbrev
+      locale="es_ES">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="eu_ES">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="fa_IR">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="fi_FI">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="fr_CA">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="fr_FR">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="hi_IN">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="hr_HR">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="hu_HU">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="id_ID">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="it_IT">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="ku_IQ">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="nb_NO">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="nl_NL">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="pl_PL">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="pt_BR">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="pt_PT">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="ru_RU">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="sl_SI">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="sv_SE">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="tr_TR">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="uk_UA">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="vi_VN">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <abbrev
+      locale="zh_CN">##default.groups.abbrev.productionEditor##</abbrev>
+
+      <stage_assignments>4:5</stage_assignments>
+    </user_group>
+
+    <user_group>
+      <role_id>17</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>true</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.sectionEditor##</name>
+
+      <name locale="ca_ES">##default.groups.name.sectionEditor##</name>
+
+      <name locale="cs_CZ">##default.groups.name.sectionEditor##</name>
+
+      <name locale="da_DK">##default.groups.name.sectionEditor##</name>
+
+      <name locale="de_DE">##default.groups.name.sectionEditor##</name>
+
+      <name locale="en_US">Section editor</name>
+
+      <name locale="es_ES">##default.groups.name.sectionEditor##</name>
+
+      <name locale="eu_ES">##default.groups.name.sectionEditor##</name>
+
+      <name locale="fa_IR">##default.groups.name.sectionEditor##</name>
+
+      <name locale="fi_FI">##default.groups.name.sectionEditor##</name>
+
+      <name locale="fr_CA">##default.groups.name.sectionEditor##</name>
+
+      <name locale="fr_FR">##default.groups.name.sectionEditor##</name>
+
+      <name locale="hi_IN">##default.groups.name.sectionEditor##</name>
+
+      <name locale="hr_HR">##default.groups.name.sectionEditor##</name>
+
+      <name locale="hu_HU">##default.groups.name.sectionEditor##</name>
+
+      <name locale="id_ID">##default.groups.name.sectionEditor##</name>
+
+      <name locale="it_IT">##default.groups.name.sectionEditor##</name>
+
+      <name locale="ku_IQ">##default.groups.name.sectionEditor##</name>
+
+      <name locale="nb_NO">##default.groups.name.sectionEditor##</name>
+
+      <name locale="nl_NL">##default.groups.name.sectionEditor##</name>
+
+      <name locale="pl_PL">##default.groups.name.sectionEditor##</name>
+
+      <name locale="pt_BR">##default.groups.name.sectionEditor##</name>
+
+      <name locale="pt_PT">##default.groups.name.sectionEditor##</name>
+
+      <name locale="ru_RU">##default.groups.name.sectionEditor##</name>
+
+      <name locale="sl_SI">##default.groups.name.sectionEditor##</name>
+
+      <name
+      locale="sr_RS@cyrillic">##default.groups.name.sectionEditor##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.sectionEditor##</name>
+
+      <name locale="sv_SE">##default.groups.name.sectionEditor##</name>
+
+      <name locale="tr_TR">##default.groups.name.sectionEditor##</name>
+
+      <name locale="uk_UA">##default.groups.name.sectionEditor##</name>
+
+      <name locale="vi_VN">##default.groups.name.sectionEditor##</name>
+
+      <name locale="zh_CN">##default.groups.name.sectionEditor##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="en_US">SecE</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.sectionEditor##</abbrev>
+
+      <stage_assignments>1:3:4:5</stage_assignments>
+    </user_group>
+
+    <user_group>
+      <role_id>17</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.guestEditor##</name>
+
+      <name locale="ca_ES">##default.groups.name.guestEditor##</name>
+
+      <name locale="cs_CZ">##default.groups.name.guestEditor##</name>
+
+      <name locale="da_DK">##default.groups.name.guestEditor##</name>
+
+      <name locale="de_DE">##default.groups.name.guestEditor##</name>
+
+      <name locale="en_US">Guest editor</name>
+
+      <name locale="es_ES">##default.groups.name.guestEditor##</name>
+
+      <name locale="eu_ES">##default.groups.name.guestEditor##</name>
+
+      <name locale="fa_IR">##default.groups.name.guestEditor##</name>
+
+      <name locale="fi_FI">##default.groups.name.guestEditor##</name>
+
+      <name locale="fr_CA">##default.groups.name.guestEditor##</name>
+
+      <name locale="fr_FR">##default.groups.name.guestEditor##</name>
+
+      <name locale="hi_IN">##default.groups.name.guestEditor##</name>
+
+      <name locale="hr_HR">##default.groups.name.guestEditor##</name>
+
+      <name locale="hu_HU">##default.groups.name.guestEditor##</name>
+
+      <name locale="id_ID">##default.groups.name.guestEditor##</name>
+
+      <name locale="it_IT">##default.groups.name.guestEditor##</name>
+
+      <name locale="ku_IQ">##default.groups.name.guestEditor##</name>
+
+      <name locale="nb_NO">##default.groups.name.guestEditor##</name>
+
+      <name locale="nl_NL">##default.groups.name.guestEditor##</name>
+
+      <name locale="pl_PL">##default.groups.name.guestEditor##</name>
+
+      <name locale="pt_BR">##default.groups.name.guestEditor##</name>
+
+      <name locale="pt_PT">##default.groups.name.guestEditor##</name>
+
+      <name locale="ru_RU">##default.groups.name.guestEditor##</name>
+
+      <name locale="sl_SI">##default.groups.name.guestEditor##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.guestEditor##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.guestEditor##</name>
+
+      <name locale="sv_SE">##default.groups.name.guestEditor##</name>
+
+      <name locale="tr_TR">##default.groups.name.guestEditor##</name>
+
+      <name locale="uk_UA">##default.groups.name.guestEditor##</name>
+
+      <name locale="vi_VN">##default.groups.name.guestEditor##</name>
+
+      <name locale="zh_CN">##default.groups.name.guestEditor##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="en_US">GE</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.guestEditor##</abbrev>
+
+      <stage_assignments>1:3:4:5</stage_assignments>
+    </user_group>
+
+    <user_group>
+      <role_id>4097</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.copyeditor##</name>
+
+      <name locale="ca_ES">##default.groups.name.copyeditor##</name>
+
+      <name locale="cs_CZ">##default.groups.name.copyeditor##</name>
+
+      <name locale="da_DK">##default.groups.name.copyeditor##</name>
+
+      <name locale="de_DE">##default.groups.name.copyeditor##</name>
+
+      <name locale="en_US">Copyeditor</name>
+
+      <name locale="es_ES">##default.groups.name.copyeditor##</name>
+
+      <name locale="eu_ES">##default.groups.name.copyeditor##</name>
+
+      <name locale="fa_IR">##default.groups.name.copyeditor##</name>
+
+      <name locale="fi_FI">##default.groups.name.copyeditor##</name>
+
+      <name locale="fr_CA">##default.groups.name.copyeditor##</name>
+
+      <name locale="fr_FR">##default.groups.name.copyeditor##</name>
+
+      <name locale="hi_IN">##default.groups.name.copyeditor##</name>
+
+      <name locale="hr_HR">##default.groups.name.copyeditor##</name>
+
+      <name locale="hu_HU">##default.groups.name.copyeditor##</name>
+
+      <name locale="id_ID">##default.groups.name.copyeditor##</name>
+
+      <name locale="it_IT">##default.groups.name.copyeditor##</name>
+
+      <name locale="ku_IQ">##default.groups.name.copyeditor##</name>
+
+      <name locale="nb_NO">##default.groups.name.copyeditor##</name>
+
+      <name locale="nl_NL">##default.groups.name.copyeditor##</name>
+
+      <name locale="pl_PL">##default.groups.name.copyeditor##</name>
+
+      <name locale="pt_BR">##default.groups.name.copyeditor##</name>
+
+      <name locale="pt_PT">##default.groups.name.copyeditor##</name>
+
+      <name locale="ru_RU">##default.groups.name.copyeditor##</name>
+
+      <name locale="sl_SI">##default.groups.name.copyeditor##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.copyeditor##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.copyeditor##</name>
+
+      <name locale="sv_SE">##default.groups.name.copyeditor##</name>
+
+      <name locale="tr_TR">##default.groups.name.copyeditor##</name>
+
+      <name locale="uk_UA">##default.groups.name.copyeditor##</name>
+
+      <name locale="vi_VN">##default.groups.name.copyeditor##</name>
+
+      <name locale="zh_CN">##default.groups.name.copyeditor##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="en_US">CE</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.copyeditor##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>4097</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.designer##</name>
+
+      <name locale="ca_ES">##default.groups.name.designer##</name>
+
+      <name locale="cs_CZ">##default.groups.name.designer##</name>
+
+      <name locale="da_DK">##default.groups.name.designer##</name>
+
+      <name locale="de_DE">##default.groups.name.designer##</name>
+
+      <name locale="en_US">Designer</name>
+
+      <name locale="es_ES">##default.groups.name.designer##</name>
+
+      <name locale="eu_ES">##default.groups.name.designer##</name>
+
+      <name locale="fa_IR">##default.groups.name.designer##</name>
+
+      <name locale="fi_FI">##default.groups.name.designer##</name>
+
+      <name locale="fr_CA">##default.groups.name.designer##</name>
+
+      <name locale="fr_FR">##default.groups.name.designer##</name>
+
+      <name locale="hi_IN">##default.groups.name.designer##</name>
+
+      <name locale="hr_HR">##default.groups.name.designer##</name>
+
+      <name locale="hu_HU">##default.groups.name.designer##</name>
+
+      <name locale="id_ID">##default.groups.name.designer##</name>
+
+      <name locale="it_IT">##default.groups.name.designer##</name>
+
+      <name locale="ku_IQ">##default.groups.name.designer##</name>
+
+      <name locale="nb_NO">##default.groups.name.designer##</name>
+
+      <name locale="nl_NL">##default.groups.name.designer##</name>
+
+      <name locale="pl_PL">##default.groups.name.designer##</name>
+
+      <name locale="pt_BR">##default.groups.name.designer##</name>
+
+      <name locale="pt_PT">##default.groups.name.designer##</name>
+
+      <name locale="ru_RU">##default.groups.name.designer##</name>
+
+      <name locale="sl_SI">##default.groups.name.designer##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.designer##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.designer##</name>
+
+      <name locale="sv_SE">##default.groups.name.designer##</name>
+
+      <name locale="tr_TR">##default.groups.name.designer##</name>
+
+      <name locale="uk_UA">##default.groups.name.designer##</name>
+
+      <name locale="vi_VN">##default.groups.name.designer##</name>
+
+      <name locale="zh_CN">##default.groups.name.designer##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="en_US">Design</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="sr_RS@latin">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.designer##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.designer##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>4097</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.funding##</name>
+
+      <name locale="ca_ES">##default.groups.name.funding##</name>
+
+      <name locale="cs_CZ">##default.groups.name.funding##</name>
+
+      <name locale="da_DK">##default.groups.name.funding##</name>
+
+      <name locale="de_DE">##default.groups.name.funding##</name>
+
+      <name locale="en_US">Funding coordinator</name>
+
+      <name locale="es_ES">##default.groups.name.funding##</name>
+
+      <name locale="eu_ES">##default.groups.name.funding##</name>
+
+      <name locale="fa_IR">##default.groups.name.funding##</name>
+
+      <name locale="fi_FI">##default.groups.name.funding##</name>
+
+      <name locale="fr_CA">##default.groups.name.funding##</name>
+
+      <name locale="fr_FR">##default.groups.name.funding##</name>
+
+      <name locale="hi_IN">##default.groups.name.funding##</name>
+
+      <name locale="hr_HR">##default.groups.name.funding##</name>
+
+      <name locale="hu_HU">##default.groups.name.funding##</name>
+
+      <name locale="id_ID">##default.groups.name.funding##</name>
+
+      <name locale="it_IT">##default.groups.name.funding##</name>
+
+      <name locale="ku_IQ">##default.groups.name.funding##</name>
+
+      <name locale="nb_NO">##default.groups.name.funding##</name>
+
+      <name locale="nl_NL">##default.groups.name.funding##</name>
+
+      <name locale="pl_PL">##default.groups.name.funding##</name>
+
+      <name locale="pt_BR">##default.groups.name.funding##</name>
+
+      <name locale="pt_PT">##default.groups.name.funding##</name>
+
+      <name locale="ru_RU">##default.groups.name.funding##</name>
+
+      <name locale="sl_SI">##default.groups.name.funding##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.funding##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.funding##</name>
+
+      <name locale="sv_SE">##default.groups.name.funding##</name>
+
+      <name locale="tr_TR">##default.groups.name.funding##</name>
+
+      <name locale="uk_UA">##default.groups.name.funding##</name>
+
+      <name locale="vi_VN">##default.groups.name.funding##</name>
+
+      <name locale="zh_CN">##default.groups.name.funding##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="en_US">FC</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="sr_RS@latin">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.funding##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.funding##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>4097</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.indexer##</name>
+
+      <name locale="ca_ES">##default.groups.name.indexer##</name>
+
+      <name locale="cs_CZ">##default.groups.name.indexer##</name>
+
+      <name locale="da_DK">##default.groups.name.indexer##</name>
+
+      <name locale="de_DE">##default.groups.name.indexer##</name>
+
+      <name locale="en_US">Indexer</name>
+
+      <name locale="es_ES">##default.groups.name.indexer##</name>
+
+      <name locale="eu_ES">##default.groups.name.indexer##</name>
+
+      <name locale="fa_IR">##default.groups.name.indexer##</name>
+
+      <name locale="fi_FI">##default.groups.name.indexer##</name>
+
+      <name locale="fr_CA">##default.groups.name.indexer##</name>
+
+      <name locale="fr_FR">##default.groups.name.indexer##</name>
+
+      <name locale="hi_IN">##default.groups.name.indexer##</name>
+
+      <name locale="hr_HR">##default.groups.name.indexer##</name>
+
+      <name locale="hu_HU">##default.groups.name.indexer##</name>
+
+      <name locale="id_ID">##default.groups.name.indexer##</name>
+
+      <name locale="it_IT">##default.groups.name.indexer##</name>
+
+      <name locale="ku_IQ">##default.groups.name.indexer##</name>
+
+      <name locale="nb_NO">##default.groups.name.indexer##</name>
+
+      <name locale="nl_NL">##default.groups.name.indexer##</name>
+
+      <name locale="pl_PL">##default.groups.name.indexer##</name>
+
+      <name locale="pt_BR">##default.groups.name.indexer##</name>
+
+      <name locale="pt_PT">##default.groups.name.indexer##</name>
+
+      <name locale="ru_RU">##default.groups.name.indexer##</name>
+
+      <name locale="sl_SI">##default.groups.name.indexer##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.indexer##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.indexer##</name>
+
+      <name locale="sv_SE">##default.groups.name.indexer##</name>
+
+      <name locale="tr_TR">##default.groups.name.indexer##</name>
+
+      <name locale="uk_UA">##default.groups.name.indexer##</name>
+
+      <name locale="vi_VN">##default.groups.name.indexer##</name>
+
+      <name locale="zh_CN">##default.groups.name.indexer##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="en_US">IND</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="sr_RS@latin">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.indexer##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.indexer##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>4097</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.layoutEditor##</name>
+
+      <name locale="ca_ES">##default.groups.name.layoutEditor##</name>
+
+      <name locale="cs_CZ">##default.groups.name.layoutEditor##</name>
+
+      <name locale="da_DK">##default.groups.name.layoutEditor##</name>
+
+      <name locale="de_DE">##default.groups.name.layoutEditor##</name>
+
+      <name locale="en_US">Layout Editor</name>
+
+      <name locale="es_ES">##default.groups.name.layoutEditor##</name>
+
+      <name locale="eu_ES">##default.groups.name.layoutEditor##</name>
+
+      <name locale="fa_IR">##default.groups.name.layoutEditor##</name>
+
+      <name locale="fi_FI">##default.groups.name.layoutEditor##</name>
+
+      <name locale="fr_CA">##default.groups.name.layoutEditor##</name>
+
+      <name locale="fr_FR">##default.groups.name.layoutEditor##</name>
+
+      <name locale="hi_IN">##default.groups.name.layoutEditor##</name>
+
+      <name locale="hr_HR">##default.groups.name.layoutEditor##</name>
+
+      <name locale="hu_HU">##default.groups.name.layoutEditor##</name>
+
+      <name locale="id_ID">##default.groups.name.layoutEditor##</name>
+
+      <name locale="it_IT">##default.groups.name.layoutEditor##</name>
+
+      <name locale="ku_IQ">##default.groups.name.layoutEditor##</name>
+
+      <name locale="nb_NO">##default.groups.name.layoutEditor##</name>
+
+      <name locale="nl_NL">##default.groups.name.layoutEditor##</name>
+
+      <name locale="pl_PL">##default.groups.name.layoutEditor##</name>
+
+      <name locale="pt_BR">##default.groups.name.layoutEditor##</name>
+
+      <name locale="pt_PT">##default.groups.name.layoutEditor##</name>
+
+      <name locale="ru_RU">##default.groups.name.layoutEditor##</name>
+
+      <name locale="sl_SI">##default.groups.name.layoutEditor##</name>
+
+      <name
+      locale="sr_RS@cyrillic">##default.groups.name.layoutEditor##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.layoutEditor##</name>
+
+      <name locale="sv_SE">##default.groups.name.layoutEditor##</name>
+
+      <name locale="tr_TR">##default.groups.name.layoutEditor##</name>
+
+      <name locale="uk_UA">##default.groups.name.layoutEditor##</name>
+
+      <name locale="vi_VN">##default.groups.name.layoutEditor##</name>
+
+      <name locale="zh_CN">##default.groups.name.layoutEditor##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="en_US">LE</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.layoutEditor##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>4097</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.marketing##</name>
+
+      <name locale="ca_ES">##default.groups.name.marketing##</name>
+
+      <name locale="cs_CZ">##default.groups.name.marketing##</name>
+
+      <name locale="da_DK">##default.groups.name.marketing##</name>
+
+      <name locale="de_DE">##default.groups.name.marketing##</name>
+
+      <name locale="en_US">Marketing and sales coordinator</name>
+
+      <name locale="es_ES">##default.groups.name.marketing##</name>
+
+      <name locale="eu_ES">##default.groups.name.marketing##</name>
+
+      <name locale="fa_IR">##default.groups.name.marketing##</name>
+
+      <name locale="fi_FI">##default.groups.name.marketing##</name>
+
+      <name locale="fr_CA">##default.groups.name.marketing##</name>
+
+      <name locale="fr_FR">##default.groups.name.marketing##</name>
+
+      <name locale="hi_IN">##default.groups.name.marketing##</name>
+
+      <name locale="hr_HR">##default.groups.name.marketing##</name>
+
+      <name locale="hu_HU">##default.groups.name.marketing##</name>
+
+      <name locale="id_ID">##default.groups.name.marketing##</name>
+
+      <name locale="it_IT">##default.groups.name.marketing##</name>
+
+      <name locale="ku_IQ">##default.groups.name.marketing##</name>
+
+      <name locale="nb_NO">##default.groups.name.marketing##</name>
+
+      <name locale="nl_NL">##default.groups.name.marketing##</name>
+
+      <name locale="pl_PL">##default.groups.name.marketing##</name>
+
+      <name locale="pt_BR">##default.groups.name.marketing##</name>
+
+      <name locale="pt_PT">##default.groups.name.marketing##</name>
+
+      <name locale="ru_RU">##default.groups.name.marketing##</name>
+
+      <name locale="sl_SI">##default.groups.name.marketing##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.marketing##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.marketing##</name>
+
+      <name locale="sv_SE">##default.groups.name.marketing##</name>
+
+      <name locale="tr_TR">##default.groups.name.marketing##</name>
+
+      <name locale="uk_UA">##default.groups.name.marketing##</name>
+
+      <name locale="vi_VN">##default.groups.name.marketing##</name>
+
+      <name locale="zh_CN">##default.groups.name.marketing##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="en_US">MS</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.marketing##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.marketing##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>4097</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.proofreader##</name>
+
+      <name locale="ca_ES">##default.groups.name.proofreader##</name>
+
+      <name locale="cs_CZ">##default.groups.name.proofreader##</name>
+
+      <name locale="da_DK">##default.groups.name.proofreader##</name>
+
+      <name locale="de_DE">##default.groups.name.proofreader##</name>
+
+      <name locale="en_US">Proofreader</name>
+
+      <name locale="es_ES">##default.groups.name.proofreader##</name>
+
+      <name locale="eu_ES">##default.groups.name.proofreader##</name>
+
+      <name locale="fa_IR">##default.groups.name.proofreader##</name>
+
+      <name locale="fi_FI">##default.groups.name.proofreader##</name>
+
+      <name locale="fr_CA">##default.groups.name.proofreader##</name>
+
+      <name locale="fr_FR">##default.groups.name.proofreader##</name>
+
+      <name locale="hi_IN">##default.groups.name.proofreader##</name>
+
+      <name locale="hr_HR">##default.groups.name.proofreader##</name>
+
+      <name locale="hu_HU">##default.groups.name.proofreader##</name>
+
+      <name locale="id_ID">##default.groups.name.proofreader##</name>
+
+      <name locale="it_IT">##default.groups.name.proofreader##</name>
+
+      <name locale="ku_IQ">##default.groups.name.proofreader##</name>
+
+      <name locale="nb_NO">##default.groups.name.proofreader##</name>
+
+      <name locale="nl_NL">##default.groups.name.proofreader##</name>
+
+      <name locale="pl_PL">##default.groups.name.proofreader##</name>
+
+      <name locale="pt_BR">##default.groups.name.proofreader##</name>
+
+      <name locale="pt_PT">##default.groups.name.proofreader##</name>
+
+      <name locale="ru_RU">##default.groups.name.proofreader##</name>
+
+      <name locale="sl_SI">##default.groups.name.proofreader##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.proofreader##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.proofreader##</name>
+
+      <name locale="sv_SE">##default.groups.name.proofreader##</name>
+
+      <name locale="tr_TR">##default.groups.name.proofreader##</name>
+
+      <name locale="uk_UA">##default.groups.name.proofreader##</name>
+
+      <name locale="vi_VN">##default.groups.name.proofreader##</name>
+
+      <name locale="zh_CN">##default.groups.name.proofreader##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="en_US">PR</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.proofreader##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.proofreader##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>65536</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>true</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.author##</name>
+
+      <name locale="ca_ES">##default.groups.name.author##</name>
+
+      <name locale="cs_CZ">##default.groups.name.author##</name>
+
+      <name locale="da_DK">##default.groups.name.author##</name>
+
+      <name locale="de_DE">##default.groups.name.author##</name>
+
+      <name locale="en_US">Author</name>
+
+      <name locale="es_ES">##default.groups.name.author##</name>
+
+      <name locale="eu_ES">##default.groups.name.author##</name>
+
+      <name locale="fa_IR">##default.groups.name.author##</name>
+
+      <name locale="fi_FI">##default.groups.name.author##</name>
+
+      <name locale="fr_CA">##default.groups.name.author##</name>
+
+      <name locale="fr_FR">##default.groups.name.author##</name>
+
+      <name locale="hi_IN">##default.groups.name.author##</name>
+
+      <name locale="hr_HR">##default.groups.name.author##</name>
+
+      <name locale="hu_HU">##default.groups.name.author##</name>
+
+      <name locale="id_ID">##default.groups.name.author##</name>
+
+      <name locale="it_IT">##default.groups.name.author##</name>
+
+      <name locale="ku_IQ">##default.groups.name.author##</name>
+
+      <name locale="nb_NO">##default.groups.name.author##</name>
+
+      <name locale="nl_NL">##default.groups.name.author##</name>
+
+      <name locale="pl_PL">##default.groups.name.author##</name>
+
+      <name locale="pt_BR">##default.groups.name.author##</name>
+
+      <name locale="pt_PT">##default.groups.name.author##</name>
+
+      <name locale="ru_RU">##default.groups.name.author##</name>
+
+      <name locale="sl_SI">##default.groups.name.author##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.author##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.author##</name>
+
+      <name locale="sv_SE">##default.groups.name.author##</name>
+
+      <name locale="tr_TR">##default.groups.name.author##</name>
+
+      <name locale="uk_UA">##default.groups.name.author##</name>
+
+      <name locale="vi_VN">##default.groups.name.author##</name>
+
+      <name locale="zh_CN">##default.groups.name.author##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="en_US">AU</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="sr_RS@latin">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.author##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.author##</abbrev>
+
+      <stage_assignments>1:3:4:5</stage_assignments>
+    </user_group>
+
+    <user_group>
+      <role_id>65536</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.translator##</name>
+
+      <name locale="ca_ES">##default.groups.name.translator##</name>
+
+      <name locale="cs_CZ">##default.groups.name.translator##</name>
+
+      <name locale="da_DK">##default.groups.name.translator##</name>
+
+      <name locale="de_DE">##default.groups.name.translator##</name>
+
+      <name locale="en_US">Translator</name>
+
+      <name locale="es_ES">##default.groups.name.translator##</name>
+
+      <name locale="eu_ES">##default.groups.name.translator##</name>
+
+      <name locale="fa_IR">##default.groups.name.translator##</name>
+
+      <name locale="fi_FI">##default.groups.name.translator##</name>
+
+      <name locale="fr_CA">##default.groups.name.translator##</name>
+
+      <name locale="fr_FR">##default.groups.name.translator##</name>
+
+      <name locale="hi_IN">##default.groups.name.translator##</name>
+
+      <name locale="hr_HR">##default.groups.name.translator##</name>
+
+      <name locale="hu_HU">##default.groups.name.translator##</name>
+
+      <name locale="id_ID">##default.groups.name.translator##</name>
+
+      <name locale="it_IT">##default.groups.name.translator##</name>
+
+      <name locale="ku_IQ">##default.groups.name.translator##</name>
+
+      <name locale="nb_NO">##default.groups.name.translator##</name>
+
+      <name locale="nl_NL">##default.groups.name.translator##</name>
+
+      <name locale="pl_PL">##default.groups.name.translator##</name>
+
+      <name locale="pt_BR">##default.groups.name.translator##</name>
+
+      <name locale="pt_PT">##default.groups.name.translator##</name>
+
+      <name locale="ru_RU">##default.groups.name.translator##</name>
+
+      <name locale="sl_SI">##default.groups.name.translator##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.translator##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.translator##</name>
+
+      <name locale="sv_SE">##default.groups.name.translator##</name>
+
+      <name locale="tr_TR">##default.groups.name.translator##</name>
+
+      <name locale="uk_UA">##default.groups.name.translator##</name>
+
+      <name locale="vi_VN">##default.groups.name.translator##</name>
+
+      <name locale="zh_CN">##default.groups.name.translator##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="en_US">Trans</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.translator##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.translator##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>4096</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>true</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.externalReviewer##</name>
+
+      <name locale="ca_ES">##default.groups.name.externalReviewer##</name>
+
+      <name locale="cs_CZ">##default.groups.name.externalReviewer##</name>
+
+      <name locale="da_DK">##default.groups.name.externalReviewer##</name>
+
+      <name locale="de_DE">##default.groups.name.externalReviewer##</name>
+
+      <name locale="en_US">Reviewer</name>
+
+      <name locale="es_ES">##default.groups.name.externalReviewer##</name>
+
+      <name locale="eu_ES">##default.groups.name.externalReviewer##</name>
+
+      <name locale="fa_IR">##default.groups.name.externalReviewer##</name>
+
+      <name locale="fi_FI">##default.groups.name.externalReviewer##</name>
+
+      <name locale="fr_CA">##default.groups.name.externalReviewer##</name>
+
+      <name locale="fr_FR">##default.groups.name.externalReviewer##</name>
+
+      <name locale="hi_IN">##default.groups.name.externalReviewer##</name>
+
+      <name locale="hr_HR">##default.groups.name.externalReviewer##</name>
+
+      <name locale="hu_HU">##default.groups.name.externalReviewer##</name>
+
+      <name locale="id_ID">##default.groups.name.externalReviewer##</name>
+
+      <name locale="it_IT">##default.groups.name.externalReviewer##</name>
+
+      <name locale="ku_IQ">##default.groups.name.externalReviewer##</name>
+
+      <name locale="nb_NO">##default.groups.name.externalReviewer##</name>
+
+      <name locale="nl_NL">##default.groups.name.externalReviewer##</name>
+
+      <name locale="pl_PL">##default.groups.name.externalReviewer##</name>
+
+      <name locale="pt_BR">##default.groups.name.externalReviewer##</name>
+
+      <name locale="pt_PT">##default.groups.name.externalReviewer##</name>
+
+      <name locale="ru_RU">##default.groups.name.externalReviewer##</name>
+
+      <name locale="sl_SI">##default.groups.name.externalReviewer##</name>
+
+      <name
+      locale="sr_RS@cyrillic">##default.groups.name.externalReviewer##</name>
+
+      <name
+      locale="sr_RS@latin">##default.groups.name.externalReviewer##</name>
+
+      <name locale="sv_SE">##default.groups.name.externalReviewer##</name>
+
+      <name locale="tr_TR">##default.groups.name.externalReviewer##</name>
+
+      <name locale="uk_UA">##default.groups.name.externalReviewer##</name>
+
+      <name locale="vi_VN">##default.groups.name.externalReviewer##</name>
+
+      <name locale="zh_CN">##default.groups.name.externalReviewer##</name>
+
+      <abbrev
+      locale="ar_IQ">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="ca_ES">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="cs_CZ">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="da_DK">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="de_DE">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev locale="en_US">R</abbrev>
+
+      <abbrev
+      locale="es_ES">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="eu_ES">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="fa_IR">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="fi_FI">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="fr_CA">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="fr_FR">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="hi_IN">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="hr_HR">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="hu_HU">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="id_ID">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="it_IT">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="ku_IQ">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="nb_NO">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="nl_NL">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="pl_PL">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="pt_BR">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="pt_PT">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="ru_RU">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="sl_SI">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="sv_SE">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="tr_TR">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="uk_UA">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="vi_VN">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <abbrev
+      locale="zh_CN">##default.groups.abbrev.externalReviewer##</abbrev>
+
+      <stage_assignments>3</stage_assignments>
+    </user_group>
+
+    <user_group>
+      <role_id>1048576</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>true</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.reader##</name>
+
+      <name locale="ca_ES">##default.groups.name.reader##</name>
+
+      <name locale="cs_CZ">##default.groups.name.reader##</name>
+
+      <name locale="da_DK">##default.groups.name.reader##</name>
+
+      <name locale="de_DE">##default.groups.name.reader##</name>
+
+      <name locale="en_US">Reader</name>
+
+      <name locale="es_ES">##default.groups.name.reader##</name>
+
+      <name locale="eu_ES">##default.groups.name.reader##</name>
+
+      <name locale="fa_IR">##default.groups.name.reader##</name>
+
+      <name locale="fi_FI">##default.groups.name.reader##</name>
+
+      <name locale="fr_CA">##default.groups.name.reader##</name>
+
+      <name locale="fr_FR">##default.groups.name.reader##</name>
+
+      <name locale="hi_IN">##default.groups.name.reader##</name>
+
+      <name locale="hr_HR">##default.groups.name.reader##</name>
+
+      <name locale="hu_HU">##default.groups.name.reader##</name>
+
+      <name locale="id_ID">##default.groups.name.reader##</name>
+
+      <name locale="it_IT">##default.groups.name.reader##</name>
+
+      <name locale="ku_IQ">##default.groups.name.reader##</name>
+
+      <name locale="nb_NO">##default.groups.name.reader##</name>
+
+      <name locale="nl_NL">##default.groups.name.reader##</name>
+
+      <name locale="pl_PL">##default.groups.name.reader##</name>
+
+      <name locale="pt_BR">##default.groups.name.reader##</name>
+
+      <name locale="pt_PT">##default.groups.name.reader##</name>
+
+      <name locale="ru_RU">##default.groups.name.reader##</name>
+
+      <name locale="sl_SI">##default.groups.name.reader##</name>
+
+      <name locale="sr_RS@cyrillic">##default.groups.name.reader##</name>
+
+      <name locale="sr_RS@latin">##default.groups.name.reader##</name>
+
+      <name locale="sv_SE">##default.groups.name.reader##</name>
+
+      <name locale="tr_TR">##default.groups.name.reader##</name>
+
+      <name locale="uk_UA">##default.groups.name.reader##</name>
+
+      <name locale="vi_VN">##default.groups.name.reader##</name>
+
+      <name locale="zh_CN">##default.groups.name.reader##</name>
+
+      <abbrev locale="ar_IQ">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="ca_ES">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="cs_CZ">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="da_DK">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="de_DE">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="en_US">Read</abbrev>
+
+      <abbrev locale="es_ES">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="eu_ES">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="fa_IR">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="fi_FI">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="fr_CA">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="fr_FR">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="hi_IN">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="hr_HR">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="hu_HU">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="id_ID">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="it_IT">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="ku_IQ">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="nb_NO">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="nl_NL">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="pl_PL">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="pt_BR">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="pt_PT">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="ru_RU">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="sl_SI">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="sr_RS@latin">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="sv_SE">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="tr_TR">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="uk_UA">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="vi_VN">##default.groups.abbrev.reader##</abbrev>
+
+      <abbrev locale="zh_CN">##default.groups.abbrev.reader##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+
+    <user_group>
+      <role_id>2097152</role_id>
+
+      <context_id>8</context_id>
+
+      <is_default>true</is_default>
+
+      <show_title>false</show_title>
+
+      <permit_self_registration>false</permit_self_registration>
+
+      <permit_metadata_edit>false</permit_metadata_edit>
+
+      <name locale="ar_IQ">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="ca_ES">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="cs_CZ">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="da_DK">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="de_DE">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="en_US">Subscription Manager</name>
+
+      <name locale="es_ES">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="eu_ES">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="fa_IR">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="fi_FI">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="fr_CA">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="fr_FR">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="hi_IN">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="hr_HR">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="hu_HU">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="id_ID">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="it_IT">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="ku_IQ">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="nb_NO">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="nl_NL">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="pl_PL">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="pt_BR">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="pt_PT">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="ru_RU">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="sl_SI">##default.groups.name.subscriptionManager##</name>
+
+      <name
+      locale="sr_RS@cyrillic">##default.groups.name.subscriptionManager##</name>
+
+      <name
+      locale="sr_RS@latin">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="sv_SE">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="tr_TR">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="uk_UA">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="vi_VN">##default.groups.name.subscriptionManager##</name>
+
+      <name locale="zh_CN">##default.groups.name.subscriptionManager##</name>
+
+      <abbrev
+      locale="ar_IQ">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="ca_ES">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="cs_CZ">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="da_DK">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="de_DE">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev locale="en_US">SubM</abbrev>
+
+      <abbrev
+      locale="es_ES">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="eu_ES">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="fa_IR">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="fi_FI">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="fr_CA">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="fr_FR">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="hi_IN">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="hr_HR">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="hu_HU">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="id_ID">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="it_IT">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="ku_IQ">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="nb_NO">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="nl_NL">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="pl_PL">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="pt_BR">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="pt_PT">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="ru_RU">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="sl_SI">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="sr_RS@cyrillic">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="sr_RS@latin">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="sv_SE">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="tr_TR">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="uk_UA">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="vi_VN">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <abbrev
+      locale="zh_CN">##default.groups.abbrev.subscriptionManager##</abbrev>
+
+      <stage_assignments/>
+    </user_group>
+  </user_groups>
+
+  <users>
+    <user>
+      <givenname locale="en_US"/>
+
+      <familyname locale="en_US"/>
+
+      <email/>
+
+      <username/>
+
+      <password encryption="sha1" is_disabled="false" must_change="false">
+        <value/>
+      </password>
+
+      <user_group_ref>Author</user_group_ref>
+    </user>
+  </users>
+</PKPUsers>

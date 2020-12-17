@@ -1,26 +1,47 @@
 #!/usr/bin/env raku 
-#acpi-migrate2.raku
+#acpi-migrate5.raku
 
-#`[ todos
+#`[ 
+todos
+-download pdf-s (in page parse phase)
+-grab doi
+--open PDF for DOI (shell pdftotext *1077* scum.txt)
+---Duan School of Business IT and Logistics, RMIT University, Melbourne VIC 3000, Aust    ralia sophia.duan@rmit.edu.au
+---DOI: 10.34190/EJISE.19.22.2.001
+--doi ref (maybe <id type="internal" advice="ignore"></id>)??
+-embed pdf
+--go... base64 -i ejise-volume23-issue1-article1084.pdf -o 1084pdfen
+--galleys (use newurl)
+--open -o and make embed tag
 -loop of loops
--error / sanity checking
+-ojs cli operation
+--shell xmllint --noout sample.xml
+---sample.xml:119: parser error : EntityRef: expecting ';'
+---ne, 2018. Disponível em: http://www.scielo.br/scielo.php?script=sci_arttext&pid
+not doing
 -move pdf / new url
--handle issn (journal.issn?)
--gen issue.xml
+-error / sanity checking
 #]
 
-#`[ items 
--1x pdf per issue
--open PDF for DOI (shell pdftotext *1077* scum.txt)
-  3 Sophia Xiaoxia Duan School of Business IT and Logistics, RMIT University, Melbourne VIC 3000, Aust    ralia sophia.duan@rmit.edu.au
-  4 DOI: 10.34190/EJISE.19.22.2.001
--(shell xmllint --noout sample.xml)
-sample.xml:119: parser error : EntityRef: expecting ';'
-ne, 2018. Disponível em: http://www.scielo.br/scielo.php?script=sci_arttext&pid
--missing xml elements
---galleys (use newurl)
---doi ref (maybe <id type="internal" advice="ignore"></id>)??
--ojs cli operation
+#[ script framework design
+-outer
+--iterate iss-name/iss-url
+--mkdir
+--cd
+--store html page
+---call parser (iss-name)
+--store pdfs
+--base64 pdfs
+--txt pdfs
+---call gen-use-xml (iss-name)
+--store use-xml
+--xmllint
+--submit use-xml 
+---call gen-iss-xml (iss-name)
+--store iss-xml
+--xmllint
+--submit iss-xml
+-next
 #]
 
 #`[[ some handy file ops
@@ -111,8 +132,8 @@ my $j = journal.new(
 );
 $j = parse-issue-page( $d, $j );		#say $j;
 
-my ( $art-xml, $use-xml ) = generate-xml( $j );			
-say $art-xml; 
+my ( $iss-xml, $use-xml ) = generate-xml( $j );			
+say $iss-xml; 
 #say $use-xml;
 
 #### Generate XML ####
@@ -141,94 +162,11 @@ sub generate-xml( $j ) {
 		return $txt;
 	}
 
-	#### Issue XML Substitutions ####
+	#### Users XML Substitutions ####
+	sub do-use-xml-substitutions($ux,$art) {
 
-	my $ax = XML::Document.load('./ojs-templates/article-blank-cd14.xml');
-	my $ux = XML::Document.load('./ojs-templates/users-blank-cd2.xml');
-
-	my $vi = 0;
-	my $vol := $j.volumes[$vi]; 
-
-	my $ii = 0;
-	my $iss := $vol.issues[$ii];
-
-	#hardwire some article & publication attributes for now FIXME
-	my @art-attrs = <current_publication_id	date_submitted stage status submission_progress>; 
-	my $art-node = $ax;
-	$art-node.attribs<current_publication_id> = '4';						#or make this $art.id?
-	$art-node.attribs<date_submitted> = '2020-12-25';
-
-	my $pub-node = get-node( $ax, 'publication' );
-	$pub-node.attribs<date_published> = '2020-12-25';
-	my $pub-id = get-node-from-elem( $pub-node, 'id' ); 
-	$pub-id.remove;
-	$pub-node.insert( 'id', 4, type => 'internal', advice => 'ignore' );	#leave both at 4 for now
-
-	#hardwire issue items for now FIXME
-	my @iss-tags = <copyrightHolder copyrightYear issue_identification= number year title>;
-
-	insert-tag( $ax, 'copyrightHolder', $j.copyrightHolder );      
-	insert-tag( $ax, 'copyrightYear', $iss.year );      
-	insert-tag( $ax, 'number', $iss.number );
-	insert-tag( $ax, 'year',  $iss.year );
-	insert-tag( $ax, 'volume',  $vol.number );
-	insert-subtag( $ax, 'title', 
-		qq|Volume {$vol.number} Issue {$iss.number} / {$iss.date}|, 'issue_identification' );
-
-	my @art-tags = <id title abstract keywords= keyword authors= author= pages>;
-
-	for 1..2 -> $ai {
-	##for 1..$iss.articles.elems -> $ai {
-
-		#### Article XML Substitutions ####
-
-		my $art := $iss.articles[$ai-1];
-
-		insert-subtag( $ax, 'article', $art.id, 'id' ); #ie. article id = 1084
-		insert-tag( $ax, 'title', $art.title );
-		insert-tag( $ax, 'abstract', clean-text( $art.abstract ) );
-		insert-tag( $ax, 'pages', $art.pages );
-
-		my $k-top = get-node( $ax, 'keywords' );					#say $k-top;
-		my $k-old = get-node-from-elem( $k-top, 'keyword' ); 
-		$k-old.remove;
-
-		#| synthesize & populate keyword tags
-		for $art.keywords -> $kw {
-			$k-top.insert( 'keyword', clean-text( $kw ) );
-		} 
-
-		##my @aut-tags = <givenname familyname affiliation country email username orcid biography>;
-		my @aut-tags = <givenname familyname email>;   #omit empty tags "less is more"
-
-		my $a-top = get-node( $ax, 'authors' );					#say $a-top;
-		my $a-old = get-node-from-elem( $a-top, 'author' ); 
-		$a-old.remove;
-
-		#| synthesize & populate author & child tags
-		for 0..^$art.authors.elems -> $i {
-			my $n-aut = $a-top.insert( 'author', 
-				#include_in_browser => "true", #not allowed ?
-				user_group_ref => "Author",
-				seq => $i,
-				id => $art.id * 10 + $i,
-			).first;
-			my ( $givenname, $familyname ) = $art.split-name( $art.authors[$i] );
-			my $email = $art.make-email( $art.authors[$i], $j );
-
-			for @aut-tags.reverse -> $aut-tag {
-				given $aut-tag {
-					when <givenname>   { $n-aut.insert( $_, $givenname,  locale => "en_US" ) }
-					when <familyname>  { $n-aut.insert( $_, $familyname, locale => "en_US" ) }
-					when <email>       { $n-aut.insert( $_, $email,      				   ) }
-				}
-			}
-		} 
-
-		#### Users XML Substitutions ####
-
-		my @use-tags = <givenname familyname email username>;
-		#also need to handcrank user_group_ref password= value 
+		#| my @use-tags = <givenname familyname email username>;
+		#| also need <user_group_ref password= value> 
 
 		my $u-top = get-node( $ux, 'users' );					#say $u-top;
 		my $u-old = get-node-from-elem( $u-top, 'user' ); 
@@ -239,34 +177,131 @@ sub generate-xml( $j ) {
 			my $n-use = $u-top.insert( 'user' ).first;
 
 			my ( $givenname, $familyname ) = $art.split-name( $art.authors[$i] );
-			my $email = $art.make-email( $art.authors[$i], $j );
-			my $username = $art.make-username( $art.authors[$i] );
+			$n-use.append( 'givenname',  $givenname,  locale => "en_US" ); 
+			$n-use.append( 'familyname', $familyname, locale => "en_US" );
+			$n-use.append( 'email',      $art.make-email( $art.authors[$i], $j ) );
+			$n-use.append( 'username',   $art.make-username( $art.authors[$i] ) );
 
-			$n-use.insert( 'user_group_ref', 'Author' );
-			my $n-pass = $n-use.insert( 'password',
+			my $n-pass = $n-use.append( 'password',
 				encryption => "sha1",
 				is_disabled => "false",
 				must_change => "false",
-			).first;
-			$n-pass.insert( 'value' );						#say $n-pass;
+			)[*-1];
+			$n-pass.append( 'value' );						#say $n-pass;
 
-			for @use-tags.reverse -> $use-tag {
-				given $use-tag {
-					when <givenname>   { $n-use.insert( $_, $givenname,  locale => "en_US" ) }
-					when <familyname>  { $n-use.insert( $_, $familyname, locale => "en_US" ) }
-					when <email>       { $n-use.insert( $_, $email,      				   ) }
-					when <username>    { $n-use.insert( $_, $username,     				   ) }
-				}
-			}
+			$n-use.append( 'user_group_ref', 'Author' );
 		} 
 	}
+	#### Article XML Substitutions ####
+	sub	do-art-xml-substitutions($n-art,$art,$iss,$ai) {
 
-	return $ax, $ux;
+		#| my @art-attrs = <current_publication_id date_submitted stage status submission_progress>;
+		$n-art.attribs<current_publication_id>	= $art.id;
+		$n-art.attribs<date_submitted>			= '2020-12-31';
+		$n-art.attribs<stage>					= 'production';
+		$n-art.attribs<status>					= '3';
+		$n-art.attribs<submission_progress>		= '0';
+
+		#| my @art-tags = <id publication>;
+		$n-art.append( 'id', $art.id, type => 'internal', advice => 'ignore' );	#ie. article id = 1084
+		my $n-pub = $n-art.append( 'publication' )[*-1];
+
+		#| my @pub-attrs = <access_status date_published locale primary_contact_id 
+		#|								section_ref seq status url_path version xsi:schemaLocation>
+		$n-pub.attribs<access_status>			= '0'; 
+		$n-pub.attribs<date_published>			= '2020-12-25';
+		$n-pub.attribs<locale>					= 'en_US'; 
+		$n-pub.attribs<primary_contact_id>		= '4';
+		$n-pub.attribs<section_ref>				= 'ART';
+		$n-pub.attribs<seq>						= $ai;      #sequence number of art in iss
+		$n-pub.attribs<status>					= '3'; 
+		$n-pub.attribs<url_path>				= '';
+		$n-pub.attribs<version>					= '1';
+		$n-pub.attribs<xsi:schemaLocation>		= 'http://pkp.sfu.ca native.xsd';
+
+		#| my @pub-tags = <id title abstract pages copyrightHolder copyrightYear keywords= keyword authors= author=>;
+		$n-pub.append( 'id', $art.id, type => 'internal', advice => 'ignore' );	#ie. article id = 1084
+		$n-pub.append( 'title', $art.title, locale => 'en_US' );
+		$n-pub.append( 'abstract', clean-text($art.abstract), locale => 'en_US' );
+		$n-pub.append( 'copyrightHolder', $j.copyrightHolder, locale => 'en_US' );
+		$n-pub.append( 'copyrightYear', $iss.year );
+
+		#| synthesize & populate keyword tags
+		my $k-top = $n-pub.append( 'keywords', locale => 'en_US' )[*-1];
+		for $art.keywords -> $kw {
+			$k-top.append( 'keyword', clean-text( $kw ) );
+		} 
+
+		#| synthesize & populate author & child tags
+		#| my @aut-attrs = <id include_in_browse seq user_group_ref>;
+		#| my @aut-tags = <givenname familyname affiliation country email username orcid biography>;
+		my @aut-tags = <givenname familyname email>;   #omit empty tags "less is more"
+
+		my $a-top = $n-pub.append( 'authors' )[*-1];
+		$a-top.attribs<xsi:schemaLocation>		= 'http://pkp.sfu.ca native.xsd';
+
+		for 0..^$art.authors.elems -> $i {
+			my $n-aut = $a-top.insert( 'author', 
+				#include_in_browser => "true",      #not allowed
+				user_group_ref => "Author",
+				seq => $i,
+				id => $art.id * 10 + $i,
+			).first;
+
+			my ( $givenname, $familyname ) = $art.split-name( $art.authors[$i] );
+			$n-aut.append( 'givenname',  $givenname,  locale => "en_US" );
+			$n-aut.append( 'familyname', $familyname, locale => "en_US" );
+
+			$n-aut.append( 'email', $art.make-email( $art.authors[$i], $j ) );
+		} 
+		$n-pub.append( 'pages', $art.pages );				#leave in see if causes trouble FIXME
+	}
+
+	#### Issue XML Substitutions ####
+	my $ix = XML::Document.load('./ojs-templates/issues-blank-tw1.xml');
+	my $ux = XML::Document.load('./ojs-templates/users-blank-cd2.xml');
+
+	my $vi = 0;
+	my $vol := $j.volumes[$vi]; 
+
+	my $ii = 0;
+	my $iss := $vol.issues[$ii];
+
+	#| ignoring issue attrs
+	#| my @iss-attrs = <url_path xmlns:ns xmlns published current xsi:schemaLocation xmlns:xsi access_status>
+
+	#| adjusting issue id tags
+	#| my @iss-tags = <id issue_identification= sections= articles=>;
+	my @iid-tags = <volume number year>;
+
+	my $iss-ii-node = get-node( $ix, 'issue_identification' ).first;
+	for @iid-tags -> $iid-tag {
+		get-node-from-elem( $iss-ii-node, $iid-tag ).remove;
+	}
+	$iss-ii-node.append( 'volume', $vol.number );
+	$iss-ii-node.append( 'number', $iss.number );
+	$iss-ii-node.append( 'year',   $iss.year );
+
+	#| loop over articles
+	my $articles-node = get-node( $ix, 'articles' );
+	my $article-blank = get-node-from-elem( $articles-node, 'article' );
+	$article-blank.remove;
+
+	##for 1..2 -> $ai {
+	for 1..$iss.articles.elems -> $ai {
+		my $art := $iss.articles[$ai-1];
+
+		my $n-art = $articles-node.append( 'article' )[*-1];
+		do-art-xml-substitutions($n-art, $art, $iss, $ai);
+
+		do-use-xml-substitutions($ux, $art);
+	}
+	return $ix, $ux;
 }
 
 #### Load Structure from Old Issue Page ####
 sub parse-issue-page( $d, $j ) {
-	my $verbose = 0;
+	my $verbose = 0; 
 
 	my @title-elms   = $d.elements(:RECURSE(Inf), :class('article-title-container')); 
 	my @author-elms  = $d.elements(:RECURSE(Inf), :class('author-list')); 
@@ -327,13 +362,13 @@ sub parse-issue-page( $d, $j ) {
 			oldurl   => $art-oldurl,
 			id => url2id( $art-oldurl ),
 		);
-
 		$art.filename = url2fn( $iss, $art ); 
 
 		say "+++++++++++++++++++\n" if $verbose;
 	}
-
 	return $j;
+
+	#### Parse Subroutines ####
 
 	sub url2fn( $iss, $art? ) {
 		#EJISE-volume-23-issue-1.pdf
@@ -418,13 +453,13 @@ my @not-red = $div.elements(:class(* ne 'red'));
 # find all elements by class name
 my @elms-by-class-name = $html.elements(:RECURSE(Inf), :class('your-class-name')); 
 #and for insert, replace...
-my $id = $ax.elements(:TAG<id>).first; say $id;
+my $id = $ix.elements(:TAG<id>).first; say $id;
 my $ni = XML::Text.new( text => 'Nah Monthly' );
 $id.insert( $ni );
 my $nt = XML::Text.new( text => 'Nah Monthly' );
 $ar[3].replace( $ar[3].nodes[0], $nt );
 say $ar[3].nodes[0];
-	my $ar = $ax.root; say $ar.name;
+	my $ar = $ix.root; say $ar.name;
 	for 1..10 -> $i {
 		say "article child $i is:" ~ $ar[$i];
 	}

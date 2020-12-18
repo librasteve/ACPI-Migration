@@ -3,45 +3,13 @@
 
 #`[ 
 todos
--download pdf-s (in page parse phase)
--grab doi
---open PDF for DOI (shell pdftotext *1077* scum.txt)
----Duan School of Business IT and Logistics, RMIT University, Melbourne VIC 3000, Aust    ralia sophia.duan@rmit.edu.au
----DOI: 10.34190/EJISE.19.22.2.001
---doi ref (maybe <id type="internal" advice="ignore"></id>)??
--embed pdf
---go... base64 -i ejise-volume23-issue1-article1084.pdf -o 1084pdfen
---galleys (use newurl)
---open -o and make embed tag
--loop of loops
--ojs cli operation
---shell xmllint --noout sample.xml
----sample.xml:119: parser error : EntityRef: expecting ';'
----ne, 2018. Disponível em: http://www.scielo.br/scielo.php?script=sci_arttext&pid
-not doing
+-xml doi ref (maybe <id type="internal" advice="ignore"></id>)??
+-galley/submission/embed xml (use base64)
+
+not doing (yet)
+-looper script
 -move pdf / new url
 -error / sanity checking
-#]
-
-#`[ script framework design
--outer
---iterate iss-name/iss-url
---mkdir
---cd
---store html page
----call parser (iss-name)
---store pdfs
---base64 pdfs
---txt pdfs
----call gen-use-xml (iss-name)
---store use-xml
---xmllint
---submit use-xml 
----call gen-iss-xml (iss-name)
---store iss-xml
---xmllint
---submit iss-xml
--next
 #]
 
 use XML;
@@ -49,6 +17,19 @@ use HTML::Parser::XML;
 
 #Parse source url and generate xml for one issue
 #Structure has one journal, one volume, one issue, many articles, many-many authors
+#Needs valid source issue url as main argument - http://ejise.com/volume7/issue1
+#Creates files/folders as follows:
+#../files/ejise/htm/ejise-volume7-issue1.html
+#../files/ejise/xml-use/ejise-volume7-issue1-use.xml
+#../files/ejise/xml-iss/ejise-volume7-issue1-iss.xml
+#../files/ejise/pdf/ejise-volume7-issue1-article623.pdf
+#../files/ejise/pdf/ejise-volume7-issue1-article623.txt
+#../files/ejise/pdf/ejise-volume7-issue1-article623.b64
+#../files/ejise/pdf/ejise-volume7-issue1-article624.pdf
+#../files/ejise/pdf/ejise-volume7-issue1-article624.txt
+#../files/ejise/pdf/ejise-volume7-issue1-article624.b64
+#... etc...
+#Multiple runs with same url will overwrite
 
 #### Define Structure ####
 class journal {
@@ -56,11 +37,11 @@ class journal {
 	has $.url;
 	has $.issn;
 	has $.copyrightHolder;
-	has @.volumes;
+	has $.volume is rw;
 }
 class volume {
 	has $.number;
-	has @.issues;
+	has $.issue is rw;
 }
 class issue {
 	has $.number;
@@ -85,6 +66,8 @@ class article {
 	has $.pages;
 	has $.oldurl;
 	has $.filename is rw;
+	has $.doi is rw;
+	has $.base64 is rw;
 
 	method split-name( $author ) {
 		$author ~~ m|^(.*) \s (.*)$|;
@@ -101,53 +84,54 @@ class article {
 		return qq|$given-$family|;
 	}
 }
-#`[[ some handy file ops
-chdir( '../files2' );
-my $dir = '.';
-
-my @todo = $dir.IO;
-while @todo {
-	for @todo.pop.dir -> $path {
-		say $path.Str;
-		@todo.push: $path if $path.d;
-	}
-}
-#]]
 
 #### MAIN Loop ####
+my %args = @*ARGS.map( {.substr(1).split('=')}).flat;  
 
-my $url = 'http://ejise.com/issue/current.html';
+my $j = journal.new( 
+	name => 'ejise',
+	url  => 'ejise.com',
+	issn => 'ISSN 1566-6379',
+	copyrightHolder => 'Copyright &#169; 1999-2021 Electronic Journal of Information Systems Evaluation',
+);														#say $j;
 
-##shell( "wget $url" );
-my $file = 'current.html';
-my $fh = open( $file );
-my $html = $fh.slurp;
-$fh.close;
+chdir( "../files/{$j.name}/htm" );						#dir.say;
+my $issurl = %args<issurl>;								#eg. -issurl='http://ejise.com/volume7/issue1'
+$issurl ~~ m|volume (\d*) \/ issue (\d*)|;
+my $vol-num = $0;
+my $iss-num = $1;
+
+my $fn-html = "{$j.name}-volume{$vol-num}-issue{$iss-num}.html";
+shell( "wget -O $fn-html $issurl" );
+my $fh-html = open( $fn-html );
+my $html = $fh-html.slurp;
+$fh-html.close;
 
 my $parser = HTML::Parser::XML.new;
 $parser.parse($html);
-my $d = $parser.xmldoc; # XML::Document
+my $d = $parser.xmldoc;									#XML::Document
 
-my $j = journal.new( 
-	name => 'elise',
-	url  => 'elise.com',
-	issn => 'ISSN 1566-6379',
-	copyrightHolder => 'Copyright &#169; 1999-2021 Electronic Journal of Information Systems Evaluation',
-#`[
-	volumes => []	
-http://ejise.com/volume7/issue1
-http://ejise.com/volume8/issue1
-#]
+chdir( "../pdf" );
+parse-issue-page( $d, $j, :!verbose );
 
+chdir( "../../../raku" );
+my ( $iss-xml, $use-xml ) = generate-xml( $j );			#say $use-xml; #say $iss-xml; 
 
+chdir( "../files/{$j.name}/xml-use" );
+my $fn-xml-use = "{$j.name}-volume{$vol-num}-issue{$iss-num}-use.xml";
+my $fh-xml-use = open( 'tmp.xml', :w );
+$fh-xml-use.say( $use-xml );
+$fh-xml-use.close;
+shell( "xmllint --format tmp.xml > $fn-xml-use" );
+unlink 'tmp.xml'; 
 
-
-);
-$j = parse-issue-page( $d, $j, :!verbose );		#say $j;
-
-#my ( $iss-xml, $use-xml ) = generate-xml( $j );			
-#say $iss-xml; 
-#say $use-xml;
+chdir( "../xml-iss" );
+my $fn-xml-iss = "{$j.name}-volume{$vol-num}-issue{$iss-num}-iss.xml";
+my $fh-xml-iss = open( 'tmp.xml', :w );
+$fh-xml-iss.say( $iss-xml );
+$fh-xml-iss.close;
+shell( "xmllint --format tmp.xml > $fn-xml-iss" );
+unlink 'tmp.xml'; 
 
 #END
 
@@ -173,9 +157,8 @@ sub parse-issue-page( $d, $j, :$verbose ) {
 	my $vit = parse-title( @title-elms.splice(0,1).[0] );
 	$vit ~~ m|Volume \s* (\d*) \s* Issue \s* (\d*) \s* \/ \s* (\w*\s+\d*)|;
 
-	my $vi = 0;
-	my $vol := $j.volumes[$vi]; 
-	$vol = volume.new( 
+	my $vol := $j.volume; 
+	$j.volume = volume.new( 
 		number => +$0 
 	);
 	say "+++++++++++++++++++\n" if $verbose;
@@ -186,8 +169,7 @@ sub parse-issue-page( $d, $j, :$verbose ) {
 	my $iss-keywords = parse-keywords( @keyword-elms2.splice(0,1).[0] ); #may need this later
 	my $iss-oldurl = parse-oldurl( @oldurl-elms.splice(0,1).[0] );
 
-	my $ii = 0;
-	my $iss := $vol.issues[$ii];
+	my $iss := $vol.issue;
 	$iss = issue.new( 
 		number  => +$1, 
 		date    => ~$2, 
@@ -211,13 +193,34 @@ sub parse-issue-page( $d, $j, :$verbose ) {
 			abstract => parse-abstract( @abstr-elms[$ai-1] ),
 			keywords => parse-keywords( @keyword-elms2[$ai-1] ),
 			oldurl   => $art-oldurl,
-			id => url2id( $art-oldurl ),
+			id		 => url2id( $art-oldurl ),
 		);
-		$art.filename = url2fn( $iss, $art ); 
+
+		### PDF File Operations ###
+		my $fn-pdf = $art.filename = url2fn( $iss, $art ); 
+		shell( "wget -O $fn-pdf {$art.oldurl}" );
+
+		$art.filename ~~ m|(.*)\.pdf|;
+		my $fn-txt = "$0.txt"; 
+		my $fn-b64 = "$0.b64"; 
+
+		shell( "pdftotext -f 1 -l 1 -enc UTF-8 $fn-pdf $fn-txt" ); 
+		my $fh-txt = open( $fn-txt );
+		my @txt-lines = $fh-txt.lines;
+		$fh-txt.close; 
+		for @txt-lines -> $txt-line {
+			if $txt-line ~~ m|DOI\: (.*) $| {
+				$art.doi = $0.trim;
+			}
+		}
+
+		shell( "base64 -i $fn-pdf -o $fn-b64" ); 
+		my $fh-b64 = open( $fn-b64, :bin );
+		$art.base64 = $fh-b64.slurp;
+		$fh-b64.close; 
 
 		say "+++++++++++++++++++\n" if $verbose;
 	}
-	return $j;
 
 	#### Parse Subroutines ####
 	sub url2fn( $iss, $art? ) {
@@ -264,21 +267,25 @@ sub parse-issue-page( $d, $j, :$verbose ) {
 		return @res;
 	}
 	sub parse-abstract( $t ) {
-		my $res  = $t.firstChild().text.trim;
-		$res ~~ s:global/\n//;
-		say "Abstract:\n$res" if $verbose;
-		return $res;
+		try {
+			my $res  = $t.firstChild().text.trim;
+			$res ~~ s:global/\n//;
+			say "Abstract:\n$res" if $verbose;
+			return $res;
+		} // warn "No abstract found.";
 	}
 	sub parse-keywords( $t ) {
-		my @a    = $t.elements(:TAG<a>);
-		my @res;
-		say "Keywords:" if $verbose;
-		for 0..^@a -> $j {
-			my $res  = @a[$j].firstChild().text.trim;
-			say "$res" if $verbose;
-			@res.push: $res;
-		}
-		return @res;
+		try {
+			my @a    = $t.elements(:TAG<a>);
+			my @res;
+			say "Keywords:" if $verbose;
+			for 0..^@a -> $j {
+				my $res  = @a[$j].firstChild().text.trim;
+				say "$res" if $verbose;
+				@res.push: $res;
+			}
+			return @res;
+		} // warn "No keywords found.";
 	}
 	sub parse-oldurl( $t ) {
 	#http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p
@@ -302,11 +309,8 @@ sub generate-xml( $j ) {
 	my $ix = XML::Document.load('./ojs-templates/issues-blank-tw1.xml');
 	my $ux = XML::Document.load('./ojs-templates/users-blank-cd2.xml');
 
-	my $vi = 0;
-	my $vol := $j.volumes[$vi]; 
-
-	my $ii = 0;
-	my $iss := $vol.issues[$ii];
+	my $vol := $j.volume; 
+	my $iss := $vol.issue;
 
 	#| ignoring issue attrs
 	#| my @iss-attrs = <url_path xmlns:ns xmlns published current xsi:schemaLocation xmlns:xsi access_status>
@@ -483,6 +487,18 @@ say $ar[3].nodes[0];
 	say $ar[3].nodes[0].WHAT;
 	say $ar[3].nodes[0];
 #]
+#`[[ some handy file ops
+chdir( '../files2' );
+my $dir = '.';
+
+my @todo = $dir.IO;
+while @todo {
+	for @todo.pop.dir -> $path {
+		say $path.Str;
+		@todo.push: $path if $path.d;
+	}
+}
+#]]
 
 
 

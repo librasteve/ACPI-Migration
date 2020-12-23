@@ -28,6 +28,10 @@ use HTML::Parser::XML;
 #... etc...
 #Multiple runs with same url will overwrite
 
+my @months = <Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec>;
+my %month-nos;
+for 0..^@months -> $i { %month-nos{@months[$i]} = sprintf( "%02d", $i+1 ) } 
+
 #### Define Structure ####
 class journal {
 	has $.name;
@@ -49,8 +53,12 @@ class issue {
 	has @.articles; #index is from 1 to n
 
 	method year {	
-		$!date ~~ m|^\w**3 \s (\d*)$| or die "bad year";		#eg. 'Feb 2020'
+		$!date ~~ m|^\w**3 \s (\d*)$| or die "bad year {$!date}";				#eg. 'Feb 2020' => '2020'
 		return ~$0;
+	}
+	method yyyy-mm-dd {
+		$!date ~~ m|^(\w**3) \s (\d*)$| or die "bad yyyy-mm-dd {$!date}";		#eg. => '2020-02-01'
+		return qq|$1-{%month-nos{$0}}-01|;
 	}
 }
 class article {
@@ -110,7 +118,7 @@ my $parser = HTML::Parser::XML.new;
 $parser.parse($html);
 my $d = $parser.xmldoc;									#ie. XML::Document from html
 chdir( "../pdf" );
-parse-issue-page( $d, $j, :!verbose, :do-pdf );
+parse-issue-page( $d, $j, :verbose, :do-pdf );
 
 chdir( "../../../raku" );
 my ( $iss-xml, $use-xml ) = generate-xml( $j );			#say $use-xml; #say $iss-xml; 
@@ -143,7 +151,8 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 	#eg. 'Volume 23 Issue 1 / Feb 2020'
 	my $itc = $iss-container.elements(:RECURSE(Inf), :class('article-title-container')).first; 
 	my $vit = parse-title( $itc );
-	$vit ~~ m|Volume \s* (\d*) \s* Issue \s* (\d*) \s* \/ \s* (\w*\s+\d*)|;
+	$vit ~~ m|Volume \s* (\d*) \s* Issue \s* (\d*) .*? \/ \s* (\w*\s+\d*)|;
+	say "Volume Issue Title: $vit";
 
 	my $vol := $j.volume; 
 	$j.volume = volume.new( 
@@ -270,7 +279,7 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 			say "Keywords:" if $verbose;
 			for 0..^@a -> $j {
 				my $res  = @a[$j].firstChild().text.trim;
-				say "$res" ;#if $verbose;
+				say "$res" if $verbose;
 				@res.push: $res;
 			}
 			return @res;
@@ -344,7 +353,7 @@ sub generate-xml( $j ) {
 
 		#| my @art-attrs = <current_publication_id date_submitted stage status submission_progress>;
 		$n-art.attribs<current_publication_id>	= $art.id;
-		$n-art.attribs<date_submitted>			= '2020-12-31';
+		$n-art.attribs<date_submitted>			= "{$iss.yyyy-mm-dd}";
 		$n-art.attribs<stage>					= 'production';
 		$n-art.attribs<status>					= '3';
 		$n-art.attribs<submission_progress>		= '0';
@@ -363,8 +372,8 @@ sub generate-xml( $j ) {
 			my $n-rev = $n-sub.append( 'revision' )[*-1];
 
 				#| my @rev-attrs = <date_modified date_uploaded filename filesize filetype genre number uploader viewable>;
-				$n-rev.attribs<date_modified>			= '2020-12-25';
-				$n-rev.attribs<date_uploaded>			= '2020-12-25';
+				$n-rev.attribs<date_modified>			= "{$iss.yyyy-mm-dd}";
+				$n-rev.attribs<date_uploaded>			= "{$iss.yyyy-mm-dd}";
 				$n-rev.attribs<filename>				= $art.filename;
 				$n-rev.attribs<filesize>				= $art.filesize;
 				$n-rev.attribs<filetype>				= 'application/pdf';
@@ -382,7 +391,7 @@ sub generate-xml( $j ) {
 		#| my @pub-attrs = <access_status date_published locale primary_contact_id 
 		#|								section_ref seq status url_path version xsi:schemaLocation>
 		$n-pub.attribs<access_status>			= '0'; 
-		$n-pub.attribs<date_published>			= '2020-12-25';
+		$n-pub.attribs<date_published>			= "{$iss.yyyy-mm-dd}";
 		$n-pub.attribs<locale>					= 'en_US'; 
 		$n-pub.attribs<primary_contact_id>		= '4';
 		$n-pub.attribs<section_ref>				= 'ART';

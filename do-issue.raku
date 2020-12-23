@@ -1,5 +1,14 @@
 #!/usr/bin/env raku 
 #do-issue.raku
+
+#`[ 
+not doing (yet)
+-looper script
+-- %h = %( vol.num => iss.elems ) 
+-move pdf / new url
+-error / sanity checking
+#]
+
 use XML;
 use HTML::Parser::XML;
 
@@ -74,18 +83,6 @@ class article {
 	}
 }
 
-#`[ 
-todos
--xml doi ref (maybe <id type="internal" advice="ignore"></id>)??
--galley/submission/embed xml (use base64)
-
-not doing (yet)
--looper script
--- %h = %( vol.num => iss.elems ) 
--move pdf / new url
--error / sanity checking
-#]
-
 #### MAIN Loop ####
 my %args = @*ARGS.map( {.substr(1).split('=')} ).flat;  
 
@@ -102,8 +99,9 @@ $issurl ~~ m|volume (\d*) \/ issue (\d*)|;
 my $vol-num = $0;
 my $iss-num = $1;
 
+my $wget-html = 1;
 my $fn-html = "{$j.name}-volume{$vol-num}-issue{$iss-num}.html";
-shell( "wget -O $fn-html $issurl" );
+shell( "wget -O $fn-html $issurl" ) if $wget-html;
 my $fh-html = open( $fn-html );
 my $html = $fh-html.slurp;
 $fh-html.close;
@@ -112,9 +110,7 @@ my $parser = HTML::Parser::XML.new;
 $parser.parse($html);
 my $d = $parser.xmldoc;									#ie. XML::Document from html
 chdir( "../pdf" );
-parse-issue-page( $d, $j, :verbose, :!do-pdf );
-
-die;
+parse-issue-page( $d, $j, :!verbose, :do-pdf );
 
 chdir( "../../../raku" );
 my ( $iss-xml, $use-xml ) = generate-xml( $j );			#say $use-xml; #say $iss-xml; 
@@ -140,25 +136,13 @@ unlink 'tmp.xml';
 #### Parse OLD Issue Page ####
 sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 
-	my @title-elms   = $d.elements(:RECURSE(Inf), :class('article-title-container')); 
-	my @author-elms  = $d.elements(:RECURSE(Inf), :class('author-list')); 
-	my @abstr-elms   = $d.elements(:RECURSE(Inf), :class('article-description-text')); 
-	my @oldurl-elms  = $d.elements(:RECURSE(Inf), :class('article-sub-container')); 
-
-	#| keywords class is duplicated - so need to keep only even elms
-	my @keyword-elms = $d.elements(:RECURSE(Inf), :class('article-description-keywords')); 
-
-say "COUNTING.."; say +@keyword-elms;
-	my @keyword-elms2;
-	for 0..^@keyword-elms -> $k {
-		@keyword-elms2.push: @keyword-elms[$k] if $k %% 2;
-	}
+	my @art-containers = $d.elements(:RECURSE(Inf), :class(/article\-container/)); 
+	my $iss-container  = @art-containers.splice(0,1).[0];
 
 	say "===Volume Info===" if $verbose;
-	#using splices to handle re-use of tag for volume/issue
-
 	#eg. 'Volume 23 Issue 1 / Feb 2020'
-	my $vit = parse-title( @title-elms.splice(0,1).[0] );
+	my $itc = $iss-container.elements(:RECURSE(Inf), :class('article-title-container')).first; 
+	my $vit = parse-title( $itc );
 	$vit ~~ m|Volume \s* (\d*) \s* Issue \s* (\d*) \s* \/ \s* (\w*\s+\d*)|;
 
 	my $vol := $j.volume; 
@@ -167,11 +151,11 @@ say "COUNTING.."; say +@keyword-elms;
 	);
 	say "+++++++++++++++++++\n" if $verbose;
 
-
 	say "===Issue Info===" if $verbose;
-	my $iss-authors = parse-authors( @author-elms.splice(0,1).[0] ); #may need this later
-	my $iss-keywords = parse-keywords( @keyword-elms2.splice(0,1).[0] ); #may need this later
-	my $iss-oldurl = parse-oldurl( @oldurl-elms.splice(0,1).[0] );
+	my $i-c := $iss-container;
+	my $iss-authors  = parse-authors(  $i-c.elements(:RECURSE(Inf), :class('author-list')).first ); #may need later
+	my $iss-keywords = parse-keywords( $i-c.elements(:RECURSE(Inf), :class('article-description-keywords')).first ); #may need ltr
+	my $iss-oldurl   = parse-oldurl(   $i-c.elements(:RECURSE(Inf), :class('article-sub-container')).first ); 
 
 	my $iss := $vol.issue;
 	$iss = issue.new( 
@@ -184,25 +168,23 @@ say "COUNTING.."; say +@keyword-elms;
 	$iss.filename = url2fn( $iss ); 
 	say "+++++++++++++++++++\n" if $verbose;
 
-	##for 1..4 -> $ai {
-	for 1..@title-elms -> $ai {
-		say "===Article No.$ai===" if $verbose;
+	for 0..^@art-containers -> $ai {
+		my $a-c = @art-containers[$ai];
 
-		my $art-oldurl = parse-oldurl( @oldurl-elms[$ai-1] ),
-		my $art := $iss.articles[$ai-1];
-say "----------------------";
-say @keyword-elms2[$ai-1];
+		say "===Article No.{$ai+1}===" if $verbose;
+
+		my $art-oldurl = parse-oldurl( $a-c.elements(:RECURSE(Inf), :class('article-sub-container')).first ); 
+
+		my $art := $iss.articles[$ai];
 		$art = article.new( 
-			title    => parse-title(    @title-elms[$ai-1] ),
-			pages    => parse-pages(    @title-elms[$ai-1] ),
-			authors  => parse-authors(  @author-elms[$ai-1] ),
-			abstract => parse-abstract( @abstr-elms[$ai-1] ),
-			keywords => parse-keywords( @keyword-elms2[$ai-1] ),
+			title    => parse-title(    $a-c.elements(:RECURSE(Inf), :class('article-title-container')).first ), 
+			pages    => parse-pages(    $a-c.elements(:RECURSE(Inf), :class('article-title-container')).first ), 
+			authors  => parse-authors(  $a-c.elements(:RECURSE(Inf), :class('author-list'            )).first ), 
+			abstract => parse-abstract( $a-c.elements(:RECURSE(Inf), :class('article-description-text')).first ), 
+			keywords => parse-keywords( $a-c.elements(:RECURSE(Inf), :class('article-description-keywords')).first ), 
 			oldurl   => $art-oldurl,
 			id		 => url2id( $art-oldurl ),
 		);
-say "=====================>";
-say $art.keywords;
 
 		if $do-pdf {
 			### PDF File Operations ###
@@ -237,18 +219,18 @@ say $art.keywords;
 	}
 
 	#### Parse Subroutines ####
-	sub parse-keywords( $t ) {
-		try {
-			my @a    = $t.elements(:TAG<a>);
-			my @res;
-			say "Keywords:";# if $verbose;
-			for 0..^@a -> $j {
-				my $res  = @a[$j].firstChild().text.trim;
-				say "$res" ;#if $verbose;
-				@res.push: $res;
-			}
-			return @res;
-		} // warn "No keywords found.";
+	sub parse-oldurl( $t ) {
+	#http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p
+	#http://ejise.com/issue/download.html?idArticle=1084 -or- issue already in download form
+		my @p    = $t.elements(:TAG<p>);
+		my @a    = @p[0].elements(:TAG<a>);
+		my $res  = @a[0].attribs<href>;
+		unless $res ~~ m|download| {
+			$res ~~ m|article(\d*)\?mode|;
+			$res = qq|http://{$j.name}.com/issue/download.html?idArticle=$0|;
+		}
+		say "OldUrl:\n$res" if $verbose;
+		return $res;
 	}
 	sub parse-title( $t ) {
 		my @a    = $t.elements(:TAG<a>);
@@ -281,18 +263,18 @@ say $art.keywords;
 			return $res;
 		} // warn "No abstract found.";
 	}
-	sub parse-oldurl( $t ) {
-	#http://issuu.com/academic-conferences.org/docs/ejise-volume23-issue1-article1093?mode=a_p
-	#http://ejise.com/issue/download.html?idArticle=1084 -or- issue already in download form
-		my @p    = $t.elements(:TAG<p>);
-		my @a    = @p[0].elements(:TAG<a>);
-		my $res  = @a[0].attribs<href>;
-		unless $res ~~ m|download| {
-			$res ~~ m|article(\d*)\?mode|;
-			$res = qq|http://{$j.name}.com/issue/download.html?idArticle=$0|;
-		}
-		say "OldUrl:\n$res" if $verbose;
-		return $res;
+	sub parse-keywords( $t ) {
+		try {
+			my @a    = $t.elements(:TAG<a>);
+			my @res;
+			say "Keywords:" if $verbose;
+			for 0..^@a -> $j {
+				my $res  = @a[$j].firstChild().text.trim;
+				say "$res" ;#if $verbose;
+				@res.push: $res;
+			}
+			return @res;
+		} // warn "No keywords found.";
 	}
 	sub url2fn( $iss, $art? ) {
 		#EJISE-volume-23-issue-1.pdf
@@ -373,7 +355,7 @@ sub generate-xml( $j ) {
 			my $n-sub = $n-art.append( 'submission_file' )[*-1];
 
 			#| my @sub-attrs = <id stage xsi:schemaLocation>;
-			$n-sub.attribs<id>						= '1';
+			$n-sub.attribs<id>						= "{20 + $ai}";  #make submission id unique
 			$n-sub.attribs<stage>					= 'proof';
 			$n-sub.attribs<xsi:schemaLocation>		= 'http://pkp.sfu.ca native.xsd';
 
@@ -387,7 +369,7 @@ sub generate-xml( $j ) {
 				$n-rev.attribs<filesize>				= $art.filesize;
 				$n-rev.attribs<filetype>				= 'application/pdf';
 				$n-rev.attribs<genre>					= 'Article Text';
-				$n-rev.attribs<number>					= '1';
+				$n-rev.attribs<number>					= "{40 + $ai}"; #make revision number unique
 				$n-rev.attribs<uploader>				= 'admin';
 				$n-rev.attribs<viewable>				= 'false';
 
@@ -412,18 +394,22 @@ sub generate-xml( $j ) {
 
 		#| my @pub-tags = <id title abstract pages copyrightHolder copyrightYear keywords= keyword authors= author=>;
 		$n-pub.append( 'id', $art.id, type => 'internal', advice => 'ignore' );	#ie. article id = 1084
+		if $art.doi {
+			$n-pub.append( 'id', $art.doi, type => 'doi', advice => 'update' );	#ie. article doi = 10.34190/et.21.1.5
+		}
+
 		$n-pub.append( 'title', $art.title, locale => 'en_US' );
 		$n-pub.append( 'abstract', clean-text($art.abstract), locale => 'en_US' );
 		$n-pub.append( 'copyrightHolder', $j.copyrightHolder, locale => 'en_US' );
 		$n-pub.append( 'copyrightYear', $iss.year );
 
 		#| synthesize & populate keyword tags
-		my $k-top = $n-pub.append( 'keywords', locale => 'en_US' )[*-1];
-dd $art.keywords;
-die;
-		for $art.keywords -> $kw {
-			$k-top.append( 'keyword', clean-text( $kw ) );
-		} 
+		if $art.keywords {
+			my $k-top = $n-pub.append( 'keywords', locale => 'en_US' )[*-1];
+			for $art.keywords -> $kw {
+				$k-top.append( 'keyword', clean-text( $kw ) );
+			} 
+		}
 
 		#| synthesize & populate author & child tags
 		#| my @aut-attrs = <id include_in_browse seq user_group_ref>;
@@ -447,6 +433,20 @@ die;
 
 			$n-aut.append( 'email', $art.make-email( $art.authors[$i], $j ) );
 		} 
+
+		my $n-gal = $n-pub.append( 'article_galley' )[*-1];
+
+		#| my @gal-attrs = <approved locale xsi:schemaLocation>;
+		$n-gal.attribs<approved>				= 'false';
+		$n-gal.attribs<locale>					= 'en_US'; 
+		$n-gal.attribs<xsi:schemaLocation>		= 'http://pkp.sfu.ca native.xsd';
+
+		#| my @gal-tags = <id name seq submission_file_ref>;
+		$n-gal.append( 'id', '2', type => 'internal', advice => 'ignore' );	#ie. gally id = 2
+		$n-gal.append( 'name',  'PDF',  locale => "en_US" );
+		$n-gal.append( 'seq', '0' );
+		$n-gal.append( 'submission_file_ref', id => "{20+$ai}", revision => "{40+$ai}" );
+
 		$n-pub.append( 'pages', $art.pages );				#leave in see if causes trouble FIXME
 	}
 	#### Users XML Substitutions ####

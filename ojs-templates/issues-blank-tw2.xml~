@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issue access_status="0" current="0" published="0" url_path=""
+       xsi:schemaLocation="http://pkp.sfu.ca native.xsd"
+       xmlns="http://pkp.sfu.ca"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:ns="http://pkp.sfu.ca">
+  <id advice="ignore" type="internal">5</id>
+
+  <issue_identification>
+    <volume>23</volume>
+
+    <number>1</number>
+
+    <year>2020</year>
+  </issue_identification>
+
+  <sections>
+    <section abstract_word_count="0" abstracts_not_required="0"
+             editor_restricted="0" hide_author="0" hide_title="0"
+             meta_indexed="1" meta_reviewed="1" ref="ART" seq="0">
+      <id advice="ignore" type="internal">6</id>
+
+      <abbrev locale="en_US">ART</abbrev>
+
+      <policy locale="en_US">Section default policy</policy>
+
+      <title locale="en_US">Articles</title>
+    </section>
+  </sections>
+
+  <articles xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
+    <article current_publication_id="14" date_submitted="2020-12-25"
+             stage="production" status="3" submission_progress="0">
+      <id advice="ignore" type="internal">14</id>
+
+      <publication access_status="0" date_published="2020-12-25"
+                   locale="en_US" primary_contact_id="4" section_ref="ART"
+                   seq="0" status="3" url_path="" version="1"
+                   xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
+        <id advice="ignore" type="internal">14</id>
+
+        <title locale="en_US">Evaluating Factors Affecting User Satisfaction
+        in University Enterprise Content Management (ECM) Systems</title>
+
+        <abstract locale="en_US">Higher learning institutions (HLIs) are
+        implementing enterprise content management (ECM) systems as web
+        portals that are helping them interact with and serve their students
+        better. However, there is a paucity of research that has evaluated the
+        factors that account for students using their university’s portals. As
+        a case study and using the D&amp;M IS Success Model as a guiding lens,
+        this paper explored the factors that influence Limkokwing University
+        of Creative Technology (LUCT) Students to use the university’s portal
+        through a survey. Data was collected from 134 students through
+        Stratified Random Sampling technique that was analysed through Partial
+        Least Square ‑ Structural Equation Modelling (PLS‑SEM). Results
+        obtained show clearly that LUCT students are using the university’s
+        portal as a result of the System Quality and Information Quality which
+        gives them Satisfaction. However, the findings reveal no significant
+        correlation between Service Quality and Satisfaction of the students
+        as well as the System Quality and Behavioural Intention (BI) to use
+        the Systems. This study has given more insights into LUCT Management,
+        Administrators, and Faculties concerning how to handle their Students
+        need. Other implications for both practice and theory were also
+        discussed.</abstract>
+
+        <copyrightHolder locale="en_US">Copyright © 1999-2021 Electronic
+        Journal of Information Systems Evaluation</copyrightHolder>
+
+        <copyrightYear>2020</copyrightYear>
+
+        <keywords locale="en_US">
+          <keyword>Intention to use</keyword>
+
+          <keyword>Students’ Satisfaction</keyword>
+
+          <keyword>DeLone and McLean (D&amp;M) IS Success Model</keyword>
+
+          <keyword>Portals</keyword>
+
+          <keyword>Enterprise Content Management (ECM)</keyword>
+
+          <keyword>LUCT</keyword>
+        </keywords>
+
+        <authors xsi:schemaLocation="http://pkp.sfu.ca native.xsd">
+          <author id="20" include_in_browse="true" seq="0"
+                  user_group_ref="Author">
+            <givenname locale="en_US">Daha Tijjani</givenname>
+
+            <familyname locale="en_US">Abdurrahaman</familyname>
+
+            <email>Daha.Tijjani.Abdurrahaman@elise.com</email>
+          </author>
+
+          <author id="19" include_in_browse="true" seq="0"
+                  user_group_ref="Author">
+            <givenname locale="en_US">Acheampong</givenname>
+
+            <familyname locale="en_US">Owusu</familyname>
+
+            <email>Acheampong.Owusu@elise.com</email>
+          </author>
+
+          <author id="18" include_in_browse="true" seq="0"
+                  user_group_ref="Author">
+            <givenname locale="en_US">Akeem Soladoye</givenname>
+
+            <familyname locale="en_US">Bakare</familyname>
+
+            <email>Akeem.Soladoye.Bakare@elise.com</email>
+          </author>
+        </authors>
+      </publication>
+    </article>
+  </articles>
+</issue>

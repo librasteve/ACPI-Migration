@@ -95,10 +95,11 @@ class article {
 my %args = @*ARGS.map( {.substr(1).split('=')} ).flat;  
 
 my $j = journal.new( 
-	name => 'ejise',
-	url  => 'ejise.com',
-	issn => 'ISSN 1566-6379',
-	copyrightHolder => 'Copyright &#169; 1999-2021 Electronic Journal of Information Systems Evaluation',
+	name => 'ejkm',
+	url  => 'ejkm.com',
+	issn => 'ISSN 1479-4411',
+	copyrightHolder => 
+			'Copyright &#169; 2003-2021 Electronic Journal of Knowledge Management',
 );														#say $j;
 
 chdir( "../files/{$j.name}/htm" );						#dir.say;
@@ -244,6 +245,8 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 	sub parse-title( $t ) {
 		my @a    = $t.elements(:TAG<a>);
 		my $res  = @a[0].firstChild().text.trim;
+		$res ~~ s:g/\s '&' \s/&amp;/;
+		$res ~~ s:g/'R&D' \s/R&amp;D/;
 		say "Title:\n$res" if $verbose;
 		return $res;
 	}
@@ -259,6 +262,7 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 		say "Authors:" if $verbose;
 		for 0..^@a -> $j {
 			my $res  = @a[$j].firstChild().text.trim;
+			$res ~~ s:g/'&'//;
 			say "$res" if $verbose;
 			@res.push: $res;
 		}
@@ -269,6 +273,7 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 			my $res  = $t.firstChild().text.trim;
 			$res ~~ s:global/\n//;
 			if $res ~~ /000000/ { return '' }
+			$res ~~ s:g/'â s'//;
 			say "Abstract:\n$res" if $verbose;
 			return $res;
 		} // warn "No abstract found.";

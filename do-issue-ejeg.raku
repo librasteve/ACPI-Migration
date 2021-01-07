@@ -95,10 +95,11 @@ class article {
 my %args = @*ARGS.map( {.substr(1).split('=')} ).flat;  
 
 my $j = journal.new( 
-	name => 'ejise',
-	url  => 'ejise.com',
-	issn => 'ISSN 1566-6379',
-	copyrightHolder => 'Copyright &#169; 1999-2021 Electronic Journal of Information Systems Evaluation',
+	name => 'ejeg',
+	url  => 'ejeg.com',
+	issn => 'ISSN 1479-439X',
+	copyrightHolder => 
+			'Copyright &#169; 2003-2021 Electronic Journal of e-Government',
 );														#say $j;
 
 chdir( "../files/{$j.name}/htm" );						#dir.say;
@@ -259,6 +260,7 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 		say "Authors:" if $verbose;
 		for 0..^@a -> $j {
 			my $res  = @a[$j].firstChild().text.trim;
+			$res ~~ s:g/'&'//;
 			say "$res" if $verbose;
 			@res.push: $res;
 		}

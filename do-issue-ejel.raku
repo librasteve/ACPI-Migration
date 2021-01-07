@@ -95,10 +95,11 @@ class article {
 my %args = @*ARGS.map( {.substr(1).split('=')} ).flat;  
 
 my $j = journal.new( 
-	name => 'ejise',
-	url  => 'ejise.com',
-	issn => 'ISSN 1566-6379',
-	copyrightHolder => 'Copyright &#169; 1999-2021 Electronic Journal of Information Systems Evaluation',
+	name => 'ejel',
+	url  => 'ejel.org',
+	issn => 'ISSN 1479-4403',
+	copyrightHolder => 
+			'Copyright &#169; 2003-2021 Electronic Journal of e-Learning',
 );														#say $j;
 
 chdir( "../files/{$j.name}/htm" );						#dir.say;
@@ -236,7 +237,7 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 		my $res  = @a[0].attribs<href>;
 		unless $res ~~ m|download| {
 			$res ~~ m|article(\d*)\?mode|;
-			$res = qq|http://{$j.name}.com/issue/download.html?idArticle=$0|;
+			$res = qq|http://{$j.name}.org/issue/download.html?idArticle=$0|;
 		}
 		say "OldUrl:\n$res" if $verbose;
 		return $res;
@@ -244,6 +245,8 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 	sub parse-title( $t ) {
 		my @a    = $t.elements(:TAG<a>);
 		my $res  = @a[0].firstChild().text.trim;
+		$res ~~ s:g/\s '&' \s/&amp;/;
+		$res ~~ s:g/'R&D' \s/R&amp;D/;
 		say "Title:\n$res" if $verbose;
 		return $res;
 	}
@@ -259,6 +262,7 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 		say "Authors:" if $verbose;
 		for 0..^@a -> $j {
 			my $res  = @a[$j].firstChild().text.trim;
+			$res ~~ s:g/'&'//;
 			say "$res" if $verbose;
 			@res.push: $res;
 		}
@@ -269,6 +273,7 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 			my $res  = $t.firstChild().text.trim;
 			$res ~~ s:global/\n//;
 			if $res ~~ /000000/ { return '' }
+			$res ~~ s:g/<[â]>//;
 			say "Abstract:\n$res" if $verbose;
 			return $res;
 		} // warn "No abstract found.";
@@ -282,6 +287,7 @@ sub parse-issue-page( $d, $j, :$verbose, :$do-pdf ) {
 				my $res  = @a[$j].firstChild().text.trim;
 				if $res ~~ /000000/ { return '' }
 				if $res ~~ /<[þÿ]>/ { return '' }
+				$res ~~ s:g/'â'//;
 				say "$res" if $verbose;
 				@res.push: $res;
 			}
@@ -467,9 +473,9 @@ sub generate-xml( $j ) {
 		#| my @use-tags = <givenname familyname email username>;
 		#| also need <user_group_ref password= value> 
 
-		my $u-top = get-node( $ux, 'users' );					#say $u-top;
-		my $u-old = get-node-from-elem( $u-top, 'user' ); 
-		$u-old.remove;
+		my $u-top = get-node( $ux, 'users' );					#say "t--" ~ $u-top ~ "--t";
+		my $u-old = get-node-from-elem( $u-top, 'user' );		#say "o--" ~ $u-old ~ "--o";
+		$u-old.remove if $u-old;
 
 		#| synthesize & populate user & child tags
 		for 0..^$art.authors.elems -> $i {
